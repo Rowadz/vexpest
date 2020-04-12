@@ -22,6 +22,9 @@ const starsTotal = (data = []) =>
     data.reduce((acc, curr) => acc + (curr.stargazers_count || 0), 0)
   )
 
+const forkedTotal = (data = []) =>
+  formatNumber(data.reduce((acc, curr) => acc + (curr.forks_count || 0), 0))
+
 const mapToArea = (data) => {
   const set = new Set()
   const map = new Map()
@@ -44,5 +47,6 @@ export {
   forkedReposCount,
   reposCount,
   mapToArea,
-  starsTotal
+  starsTotal,
+  forkedTotal
 }

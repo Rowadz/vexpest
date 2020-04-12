@@ -55,7 +55,7 @@ const optionsMerge = (
   plotOptions: {
     pie: {
       ...options.plotOptions.pie,
-      showInLegend: legend
+      showInLegend: width < 650 ? false : legend
     }
   },
   tooltip: {

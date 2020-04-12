@@ -11,6 +11,7 @@ const options = {
     type: 'pie'
     // width: '100vw'
   },
+
   legend: {
     align: 'right',
     verticalAlign: 'top',
@@ -26,7 +27,25 @@ const options = {
       showInLegend: true
     }
   },
-
+  responsive: {
+    rules: [
+      {
+        condition: {
+          maxWidth: 500
+        },
+        plotOptions: {
+          pie: {
+            showInLegend: false
+          }
+        },
+        chartOptions: {
+          legend: {
+            enabled: false
+          }
+        }
+      }
+    ]
+  },
   tooltip: {
     pointFormat: 'number of 🌟: <b>{point.y}</b>'
   }
