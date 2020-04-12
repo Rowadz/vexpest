@@ -10,9 +10,7 @@ export default function DragDrop({ child, ...reset }) {
   })
 
   const { height, x, y, width } = state
-  const childWithProps = React.cloneElement(child, {
-    doSomething: [1, 2, 3, 4]
-  })
+  const childWithProps = React.cloneElement(child, { height, width })
   return (
     <Rnd
       minHeight={height}
@@ -20,9 +18,10 @@ export default function DragDrop({ child, ...reset }) {
       minWidth={'50%'}
       style={{ background: '#444444', boxShadow: '0px 0px 10px #595959' }}
       onResize={(e, direction, ref, delta, position) => {
-        console.log({
-          mappanelheight: ref.offsetHeight,
-          mappanelwidth: ref.offsetWidth
+        setState({
+          ...reset,
+          height: ref.offsetHeight,
+          width: ref.offsetWidth
         })
       }}
       default={{

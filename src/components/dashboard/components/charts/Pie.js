@@ -3,7 +3,7 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 require('highcharts/themes/dark-unica')(Highcharts)
 
-const options = {
+let options = {
   title: {
     text: 'My chart'
   },
@@ -63,8 +63,16 @@ const options = {
   ]
 }
 
-export default function Pie({ width, height, doSomething }) {
-  console.log(doSomething)
+export default function Pie({ width, height }) {
+  console.log({ width, height })
+  options = {
+    ...options,
+    chart: {
+      ...options.chart,
+      height,
+      width: isNaN(width) ? null : width
+    }
+  }
   return (
     <HighchartsReact
       highcharts={Highcharts}
