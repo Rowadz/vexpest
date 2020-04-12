@@ -25,12 +25,32 @@ const dashboardPage = (data) => (
     <RadioButtons></RadioButtons>
     <Row>
       <Col xs={12} sm={12} md={12} lg={12}>
-        <DragDrop child={<Pie />} y={70} x={0} data={data} />
+        <DragDrop
+          child={<Pie />}
+          y={70}
+          x={0}
+          data={data}
+          yPie={'stargazers_count'}
+        />
       </Col>
     </Row>
     <Row>
       <Col xs={12} sm={12} md={12} lg={12}>
         <DragDrop child={<Worldcould />} y={670} x={0} data={data} />
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <DragDrop
+          child={<Pie />}
+          y={1270}
+          x={0}
+          data={data}
+          yPie={'size'}
+          mapper={(d) => d / 1000}
+          tooltip={{ pointFormat: 'Size in MB: <b>{point.y}</b>' }}
+          title={'Repository by Size in megabyte'}
+        />
       </Col>
     </Row>
   </section>

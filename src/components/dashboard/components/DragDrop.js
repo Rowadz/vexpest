@@ -10,7 +10,15 @@ export default function DragDrop({ child, data, ...reset }) {
   })
 
   const { height, x, y, width } = state
-  const childWithProps = React.cloneElement(child, { height, width, data })
+  const childWithProps = React.cloneElement(child, {
+    height,
+    width,
+    data,
+    y: reset.yPie,
+    tooltip: reset.tooltip,
+    mapper: reset.mapper,
+    title: reset.title
+  })
   return (
     <Rnd
       minHeight={height}
