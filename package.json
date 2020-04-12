@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "highcharts": "^8.0.4",
+    "highcharts-react-official": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-grid-system": "^6.3.0",
