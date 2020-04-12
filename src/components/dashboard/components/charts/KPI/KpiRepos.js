@@ -13,7 +13,7 @@ export default function KpiRepos({ data }) {
     >
       <Row>
         <Col xs={12} sm={12} md={12} lg={12}>
-          <h1>{count} Repositories</h1>
+          <h1>{count} Repositories Created By this user</h1>
         </Col>
       </Row>
     </wired-card>

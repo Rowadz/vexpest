@@ -13,7 +13,7 @@ export default function KpiForks({ data }) {
     >
       <Row>
         <Col xs={12} sm={12} md={12} lg={12}>
-          <h1>{count} Forked Repositories</h1>
+          <h1>{count} Repositories Forked By This User</h1>
         </Col>
       </Row>
     </wired-card>
