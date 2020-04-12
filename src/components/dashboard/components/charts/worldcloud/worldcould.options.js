@@ -1,18 +1,17 @@
 const options = {
   title: {
-    text: 'Stars by Repository'
+    text: 'Watchers by Repository'
   },
   chart: {
     height: 500,
     backgroundColor: null,
     plotBackgroundColor: null,
     plotBorderWidth: null,
-    plotShadow: false,
-    type: 'pie'
+    plotShadow: false
     // width: '100vw'
   },
   plotOptions: {
-    pie: {
+    wordcloud: {
       allowPointSelect: true,
       cursor: 'pointer',
       dataLabels: {
@@ -22,7 +21,7 @@ const options = {
   },
 
   tooltip: {
-    pointFormat: 'number of 🌟: <b>{point.y}</b>'
+    pointFormat: 'number of 👁️: <b>{point.weight}</b>'
   }
 }
 

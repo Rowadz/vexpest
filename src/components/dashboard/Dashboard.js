@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import RadioButtons from './components/RadioButtons'
 import DragDrop from './components/DragDrop'
 import Pie from './components/charts/pie/Pie'
+import Worldcould from './components/charts/worldcloud/Worldcould'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 
@@ -25,6 +26,11 @@ const dashboardPage = (data) => (
     <Row>
       <Col xs={12} sm={12} md={12} lg={12}>
         <DragDrop child={<Pie />} y={70} x={0} data={data} />
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <DragDrop child={<Worldcould />} y={670} x={0} data={data} />
       </Col>
     </Row>
   </section>

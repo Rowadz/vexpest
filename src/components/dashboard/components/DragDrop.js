@@ -16,7 +16,7 @@ export default function DragDrop({ child, data, ...reset }) {
       minHeight={height}
       maxHeight={height}
       minWidth={'50%'}
-      style={{ background: '#444444', boxShadow: '0px 0px 10px #595959' }}
+      style={{ background: '#181818', boxShadow: '0px 0px 10px #595959' }}
       onResize={(e, direction, ref, delta, position) => {
         setState({
           ...reset,
