@@ -60,6 +60,20 @@ const dashboardPage = (data) => (
         />
       </Col>
     </Row>
+    <Row>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <DragDrop
+          child={<Pie />}
+          y={1270}
+          x={0}
+          data={data}
+          yPie={'forks_count'}
+          tooltip={{ pointFormat: 'forks count ⛓️: <b>{point.y}</b>' }}
+          title={'Forks by Repository'}
+          // legend={false}
+        />
+      </Col>
+    </Row>
   </section>
 )
 

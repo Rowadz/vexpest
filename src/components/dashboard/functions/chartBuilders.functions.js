@@ -1,8 +1,10 @@
 const mapPieData = (data = [], y = 'stargazers_count', mapper) =>
-  data.map((obj) => ({
-    name: obj.name,
-    y: mapper ? mapper(obj[y]) : obj[y]
-  }))
+  data
+    .map((obj) => ({
+      name: obj.name,
+      y: mapper ? mapper(obj[y]) : obj[y]
+    }))
+    .filter(({ y }) => y > 0)
 
 const mapWordcloudData = (data = []) =>
   data.map(({ watchers_count, name, html_url }) => ({
