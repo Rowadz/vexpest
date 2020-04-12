@@ -4,6 +4,7 @@ import DragDrop from './components/DragDrop'
 import KpiForks from './components/charts/KPI/KpiForks'
 import KpiRepos from './components/charts/KPI/KpiRepos'
 import Pie from './components/charts/pie/Pie'
+import Area from './components/charts/area/Area'
 import Worldcould from './components/charts/worldcloud/Wordcould'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
@@ -72,6 +73,11 @@ const dashboardPage = (data) => (
           title={'Forks by Repository'}
           // legend={false}
         />
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <DragDrop child={<Area />} y={1870} x={0} data={data} />
       </Col>
     </Row>
   </section>

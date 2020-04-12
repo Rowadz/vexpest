@@ -13,6 +13,7 @@ const options = ({ pointStart }) => ({
   plotOptions: {
     area: {
       pointStart,
+      cursor: 'pointer',
       marker: {
         enabled: false,
         symbol: 'circle',
@@ -26,7 +27,7 @@ const options = ({ pointStart }) => ({
     }
   },
   tooltip: {
-    pointFormat: 'You have {point.y} repos in {point.x}'
+    pointFormat: 'You have created {point.y} repos in this date'
   }
 })
 
