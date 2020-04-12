@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Rnd } from 'react-rnd'
 
-export default function DragDrop({ child }) {
+export default function DragDrop({ child, ...reset }) {
+  const [state, setState] = useState({
+    x: reset.x,
+    y: reset.y,
+    width: '100%',
+    height: 500
+  })
+
+  const { height, x, y, width } = state
   return (
     <Rnd
-      minHeight={500}
-      maxHeight={500}
+      minHeight={height}
+      maxHeight={height}
       minWidth={'50%'}
       style={{ background: '#444444', boxShadow: '0px 0px 10px #595959' }}
       onResize={(e, direction, ref, delta, position) => {
@@ -15,10 +23,10 @@ export default function DragDrop({ child }) {
         })
       }}
       default={{
-        x: 0,
-        y: 70,
-        width: '100%',
-        height: 500,
+        x,
+        y,
+        width,
+        height,
         minHeight: 500
       }}
     >

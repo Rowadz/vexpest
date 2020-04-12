@@ -1,5 +1,4 @@
 import React from 'react'
-import { Rnd } from 'react-rnd'
 import RadioButtons from './components/RadioButtons'
 import DragDrop from './components/DragDrop'
 import Pie from './components/charts/Pie'
@@ -11,7 +10,7 @@ export default function Dashboard() {
       <RadioButtons></RadioButtons>
       <Row>
         <Col xs={12} sm={12} md={12} lg={12}>
-          <DragDrop child={<Pie />} />
+          <DragDrop child={<Pie />} y={70} x={0} />
         </Col>
       </Row>
     </section>
