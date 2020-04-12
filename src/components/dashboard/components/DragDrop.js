@@ -10,6 +10,9 @@ export default function DragDrop({ child, ...reset }) {
   })
 
   const { height, x, y, width } = state
+  const childWithProps = React.cloneElement(child, {
+    doSomething: [1, 2, 3, 4]
+  })
   return (
     <Rnd
       minHeight={height}
@@ -30,7 +33,7 @@ export default function DragDrop({ child, ...reset }) {
         minHeight: 500
       }}
     >
-      {child}
+      {childWithProps}
     </Rnd>
   )
 }

@@ -63,7 +63,8 @@ const options = {
   ]
 }
 
-export default function Pie({ width, height }) {
+export default function Pie({ width, height, doSomething }) {
+  console.log(doSomething)
   return (
     <HighchartsReact
       highcharts={Highcharts}
