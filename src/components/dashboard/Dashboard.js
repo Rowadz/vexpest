@@ -1,7 +1,7 @@
 import React from 'react'
 import RadioButtons from './components/RadioButtons'
 import DragDrop from './components/DragDrop'
-import Pie from './components/charts/Pie'
+import Pie from './components/charts/pie/Pie'
 import { Row, Col } from 'react-grid-system'
 
 export default function Dashboard() {

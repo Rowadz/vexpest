@@ -1,9 +1,4 @@
-import React from 'react'
-import HighchartsReact from 'highcharts-react-official'
-import Highcharts from 'highcharts'
-require('highcharts/themes/dark-unica')(Highcharts)
-
-let options = {
+const options = {
   title: {
     text: 'My chart'
   },
@@ -63,21 +58,4 @@ let options = {
   ]
 }
 
-export default function Pie({ width, height }) {
-  console.log({ width, height })
-  options = {
-    ...options,
-    chart: {
-      ...options.chart,
-      height,
-      width: isNaN(width) ? null : width
-    }
-  }
-  return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      allowChartUpdate={true}
-    />
-  )
-}
+export { options }
