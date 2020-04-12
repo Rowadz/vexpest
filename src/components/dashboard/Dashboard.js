@@ -25,7 +25,7 @@ export default function Dashboard() {
 
 const dashboardPage = (data) => (
   <section>
-    <RadioButtons></RadioButtons>
+    {/* <RadioButtons></RadioButtons> */}
     <Row>
       <Col xs={12} sm={12} md={6} lg={6}>
         <KpiRepos data={data} />
@@ -86,9 +86,7 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     const res = await (
-      await fetch(
-        'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
-      )
+      await fetch('https://api.github.com/users/getify/repos?per_page=1000')
     ).json()
     setSate(res)
   } catch (error) {
