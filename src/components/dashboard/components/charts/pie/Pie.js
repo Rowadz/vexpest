@@ -12,18 +12,37 @@ export default function Pie({
   y,
   tooltip,
   mapper,
-  title
+  title,
+  legend
 }) {
   return (
     <HighchartsReact
       highcharts={Highcharts}
-      options={optionsMerge(width, height, data, y, tooltip, mapper, title)}
+      options={optionsMerge(
+        width,
+        height,
+        data,
+        y,
+        tooltip,
+        mapper,
+        title,
+        legend
+      )}
       allowChartUpdate={true}
     />
   )
 }
 
-const optionsMerge = (width, height, data, y, tooltip, mapper, title) => ({
+const optionsMerge = (
+  width,
+  height,
+  data,
+  y,
+  tooltip,
+  mapper,
+  title,
+  legend
+) => ({
   ...options,
   title: {
     text: title || options.title.text
@@ -32,6 +51,12 @@ const optionsMerge = (width, height, data, y, tooltip, mapper, title) => ({
     ...options.chart,
     height,
     width: isNaN(width) ? null : width
+  },
+  plotOptions: {
+    pie: {
+      ...options.plotOptions.pie,
+      showInLegend: legend
+    }
   },
   tooltip: {
     ...(tooltip || options.tooltip)

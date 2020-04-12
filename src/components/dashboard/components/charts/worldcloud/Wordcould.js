@@ -1,7 +1,7 @@
 import React from 'react'
 import { mapWordcloudData } from '../../../functions/chartBuilders.functions'
 import HighchartsReact from 'highcharts-react-official'
-import { options } from './worldcould.options'
+import { options } from './wordcould.options'
 import Highcharts from 'highcharts'
 require('highcharts/modules/wordcloud')(Highcharts)
 require('highcharts/modules/boost')(Highcharts)

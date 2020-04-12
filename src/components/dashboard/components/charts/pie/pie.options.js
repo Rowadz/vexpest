@@ -11,13 +11,19 @@ const options = {
     type: 'pie'
     // width: '100vw'
   },
+  legend: {
+    align: 'right',
+    verticalAlign: 'top',
+    layout: 'vertical'
+  },
   plotOptions: {
     pie: {
       allowPointSelect: true,
       cursor: 'pointer',
       dataLabels: {
         enabled: true
-      }
+      },
+      showInLegend: true
     }
   },
 

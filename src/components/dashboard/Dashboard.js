@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import RadioButtons from './components/RadioButtons'
 import DragDrop from './components/DragDrop'
 import Pie from './components/charts/pie/Pie'
-import Worldcould from './components/charts/worldcloud/Worldcould'
+import Worldcould from './components/charts/worldcloud/Wordcould'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 
@@ -37,6 +37,7 @@ const dashboardPage = (data) => (
           mapper={(d) => d / 1000}
           tooltip={{ pointFormat: 'Size in MB: <b>{point.y}</b>' }}
           title={'Repository by Size in megabyte'}
+          legend={false}
         />
       </Col>
     </Row>
@@ -57,9 +58,7 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     const res = await (
-      await fetch(
-        'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
-      )
+      await fetch('https://api.github.com/users/getify/repos?per_page=1000')
     ).json()
     setSate(res)
   } catch (error) {

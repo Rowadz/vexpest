@@ -5,6 +5,10 @@ const mapPieData = (data = [], y = 'stargazers_count', mapper) =>
   }))
 
 const mapWordcloudData = (data = []) =>
-  data.map(({ watchers_count, name }) => ({ name, weight: watchers_count }))
+  data.map(({ watchers_count, name, html_url }) => ({
+    name,
+    weight: 1,
+    html_url
+  }))
 
 export { mapWordcloudData, mapPieData }

@@ -1,6 +1,6 @@
 const options = {
   title: {
-    text: 'Watchers by Repository'
+    text: 'All Repositories'
   },
   chart: {
     height: 500,
@@ -17,10 +17,17 @@ const options = {
       dataLabels: {
         enabled: true
       }
+    },
+    series: {
+      cursor: 'pointer',
+      events: {
+        click: (event) => window.open(event.point.html_url, '_blank').focus()
+      }
     }
   },
 
   tooltip: {
+    enabled: false,
     pointFormat: 'number of 👁️: <b>{point.weight}</b>'
   }
 }

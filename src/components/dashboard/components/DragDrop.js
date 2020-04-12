@@ -17,7 +17,8 @@ export default function DragDrop({ child, data, ...reset }) {
     y: reset.yPie,
     tooltip: reset.tooltip,
     mapper: reset.mapper,
-    title: reset.title
+    title: reset.title,
+    legend: reset.legend
   })
   return (
     <Rnd
