@@ -11,4 +11,7 @@ const mapWordcloudData = (data = []) =>
     html_url
   }))
 
-export { mapWordcloudData, mapPieData }
+const forkedReposCount = (data = []) => data.filter(({ fork }) => fork).length
+const reposCount = (data = []) => data.filter(({ fork }) => !fork).length
+
+export { mapWordcloudData, mapPieData, forkedReposCount, reposCount }

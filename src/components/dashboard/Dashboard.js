@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import RadioButtons from './components/RadioButtons'
 import DragDrop from './components/DragDrop'
+import KpiForks from './components/charts/KPI/KpiForks'
+import KpiRepos from './components/charts/KPI/KpiRepos'
 import Pie from './components/charts/pie/Pie'
 import Worldcould from './components/charts/worldcloud/Wordcould'
 import { Row, Col } from 'react-grid-system'
@@ -24,6 +26,12 @@ const dashboardPage = (data) => (
   <section>
     <RadioButtons></RadioButtons>
     <Row>
+      <Col xs={12} sm={12} md={6} lg={6}>
+        <KpiRepos data={data} />
+      </Col>
+      <Col xs={12} sm={12} md={6} lg={6}>
+        <KpiForks data={data} />
+      </Col>
       <Col xs={12} sm={12} md={6} lg={6}>
         <DragDrop child={<Worldcould />} y={70} x={0} data={data} />
       </Col>
@@ -58,7 +66,9 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     const res = await (
-      await fetch('https://api.github.com/users/getify/repos?per_page=1000')
+      await fetch(
+        'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
+      )
     ).json()
     setSate(res)
   } catch (error) {
