@@ -14,17 +14,17 @@ export default function Dashboard() {
   if (!state) {
     page = <Spinner />
   } else {
-    page = dashboardPage()
+    page = dashboardPage(state)
   }
   return <section>{page}</section>
 }
 
-const dashboardPage = () => (
+const dashboardPage = (data) => (
   <section>
     <RadioButtons></RadioButtons>
     <Row>
       <Col xs={12} sm={12} md={12} lg={12}>
-        <DragDrop child={<Pie />} y={70} x={0} />
+        <DragDrop child={<Pie />} y={70} x={0} data={data} />
       </Col>
     </Row>
   </section>
@@ -37,7 +37,6 @@ const getData = async (setSate) => {
         'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
       )
     ).json()
-    console.log(res)
     setSate(res)
   } catch (error) {
     console.log(error)

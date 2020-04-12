@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Rnd } from 'react-rnd'
 
-export default function DragDrop({ child, ...reset }) {
+export default function DragDrop({ child, data, ...reset }) {
   const [state, setState] = useState({
     x: reset.x,
     y: reset.y,
