@@ -13,8 +13,14 @@ const mapWordcloudData = (data = []) =>
     html_url
   }))
 
-const forkedReposCount = (data = []) => data.filter(({ fork }) => fork).length
-const reposCount = (data = []) => data.filter(({ fork }) => !fork).length
+const forkedReposCount = (data = []) =>
+  formatNumber(data.filter(({ fork }) => fork).length)
+const reposCount = (data = []) =>
+  formatNumber(data.filter(({ fork }) => !fork).length)
+const starsTotal = (data = []) =>
+  formatNumber(
+    data.reduce((acc, curr) => acc + (curr.stargazers_count || 0), 0)
+  )
 
 const mapToArea = (data) => {
   const set = new Set()
@@ -29,4 +35,14 @@ const mapToArea = (data) => {
   return { years, dataToViz }
 }
 
-export { mapWordcloudData, mapPieData, forkedReposCount, reposCount, mapToArea }
+const formatNumber = (num) =>
+  num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+
+export {
+  mapWordcloudData,
+  mapPieData,
+  forkedReposCount,
+  reposCount,
+  mapToArea,
+  starsTotal
+}
