@@ -18,8 +18,8 @@ const options = {
         {
           name: 'Chrome',
           y: 61.41,
-          sliced: true,
-          selected: true
+          sliced: true
+          //   selected: true
         },
         {
           name: 'Internet Explorer',

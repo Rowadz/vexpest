@@ -5,7 +5,6 @@ import Highcharts from 'highcharts'
 require('highcharts/themes/dark-unica')(Highcharts)
 
 export default function Pie({ width, height }) {
-  console.log({ width, height })
   return (
     <HighchartsReact
       highcharts={Highcharts}
