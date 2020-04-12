@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <section className="center">
+    <section style={{ textAlign: 'center' }}>
       <div style={{ padding: '10px' }}>
         <wired-textarea placeholder="Github username" rows="6"></wired-textarea>
       </div>
