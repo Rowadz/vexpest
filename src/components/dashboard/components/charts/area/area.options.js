@@ -10,6 +10,9 @@ const options = ({ pointStart }) => ({
     plotShadow: false,
     type: 'area'
   },
+  credits: {
+    enabled: false
+  },
   plotOptions: {
     area: {
       pointStart,

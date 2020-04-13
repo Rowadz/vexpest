@@ -27,6 +27,9 @@ const options = {
       showInLegend: true
     }
   },
+  credits: {
+    enabled: false
+  },
   responsive: {
     rules: [
       {

@@ -10,6 +10,9 @@ const options = {
     plotShadow: false
     // width: '100vw'
   },
+  credits: {
+    enabled: false
+  },
   plotOptions: {
     wordcloud: {
       allowPointSelect: true,

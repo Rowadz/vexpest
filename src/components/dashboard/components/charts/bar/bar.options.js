@@ -9,6 +9,9 @@ const options = (categories) => ({
   subtitle: {
     text: 'Githup public API'
   },
+  credits: {
+    enabled: false
+  },
   xAxis: {
     categories,
     crosshair: true
