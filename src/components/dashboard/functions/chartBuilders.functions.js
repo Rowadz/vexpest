@@ -38,6 +38,13 @@ const mapToArea = (data) => {
   return { years, dataToViz }
 }
 
+const languageCounter = (data = []) => {
+  const counter = {}
+  data.forEach(({ language }) => {
+    counter[language] = (counter[language] || 0) + 1
+  })
+}
+
 const formatNumber = (num) =>
   num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 
