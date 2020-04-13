@@ -15,7 +15,12 @@ const options = {
   legend: {
     align: 'right',
     verticalAlign: 'top',
-    layout: 'vertical'
+    layout: 'vertical',
+    navigation: {
+      style: {
+        color: '#fff'
+      }
+    }
   },
   plotOptions: {
     pie: {
