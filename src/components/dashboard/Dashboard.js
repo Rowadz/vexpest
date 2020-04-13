@@ -8,6 +8,7 @@ import KpiForksTotal from './components/charts/KPI/KpiForksTotal'
 import Pie from './components/charts/pie/Pie'
 import Area from './components/charts/area/Area'
 import Worldcould from './components/charts/worldcloud/Wordcould'
+import Bar from './components/charts/bar/Bar'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 
@@ -84,8 +85,11 @@ const dashboardPage = (data) => (
       </Col>
     </Row>
     <Row>
-      <Col xs={12} sm={12} md={12} lg={12}>
+      <Col xs={12} sm={12} md={6} lg={6}>
         <DragDrop child={<Area />} y={1870} x={0} data={data} />
+      </Col>
+      <Col xs={12} sm={12} md={6} lg={6}>
+        <DragDrop child={<Bar />} y={1870} x={10} data={data} />
       </Col>
     </Row>
   </section>
@@ -94,9 +98,7 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     const res = await (
-      await fetch(
-        'https://api.github.com/users/taylorotwell/repos?per_page=1000'
-      )
+      await fetch('https://api.github.com/users/fabpot/repos?per_page=1000')
     ).json()
     setSate(res)
   } catch (error) {

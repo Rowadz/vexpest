@@ -17,7 +17,7 @@ export default function Area({ width, height, data }) {
 const optionsMerge = (width, height, data) => {
   const { years, dataToViz } = mapToArea(data)
   const op = options(years[0])
-  const x = {
+  return {
     ...op,
     chart: {
       ...op.chart,
@@ -39,5 +39,4 @@ const optionsMerge = (width, height, data) => {
 
     series: [{ name: 'Repositories', data: dataToViz }]
   }
-  return x
 }

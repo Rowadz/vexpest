@@ -40,9 +40,19 @@ const mapToArea = (data) => {
 
 const languageCounter = (data = []) => {
   const counter = {}
-  data.forEach(({ language }) => {
-    counter[language] = (counter[language] || 0) + 1
-  })
+  data
+    .filter(({ language }) => language)
+    .forEach(({ language }) => {
+      counter[language] = (counter[language] || 0) + 1
+    })
+
+  return {
+    languages: Object.keys(counter),
+    values: Object.entries(counter).map(([key, val]) => ({
+      name: key,
+      data: [val]
+    }))
+  }
 }
 
 const formatNumber = (num) =>
@@ -55,5 +65,6 @@ export {
   reposCount,
   mapToArea,
   starsTotal,
-  forkedTotal
+  forkedTotal,
+  languageCounter
 }
