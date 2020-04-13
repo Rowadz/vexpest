@@ -2,6 +2,9 @@ const options = {
   title: {
     text: 'All Repositories'
   },
+  subtitle: {
+    text: 'Source: GitHub public API'
+  },
   chart: {
     height: 500,
     backgroundColor: null,

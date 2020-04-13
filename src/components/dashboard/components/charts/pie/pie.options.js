@@ -2,6 +2,9 @@ const options = {
   title: {
     text: 'Stars by Repository'
   },
+  subtitle: {
+    text: 'Source: GitHub public API'
+  },
   chart: {
     height: 500,
     backgroundColor: null,

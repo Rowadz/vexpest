@@ -7,7 +7,7 @@ const options = (categories) => ({
     text: 'Repositories By Language'
   },
   subtitle: {
-    text: 'Githup public API'
+    text: 'Source: GitHub public API'
   },
   credits: {
     enabled: false

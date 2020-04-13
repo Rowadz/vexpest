@@ -2,6 +2,9 @@ const options = ({ pointStart }) => ({
   title: {
     text: 'Repositories Rate By Years'
   },
+  subtitle: {
+    text: 'Source: GitHub public API'
+  },
   chart: {
     height: 500,
     backgroundColor: null,

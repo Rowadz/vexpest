@@ -98,7 +98,9 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     const res = await (
-      await fetch('https://api.github.com/users/fabpot/repos?per_page=1000')
+      await fetch(
+        'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
+      )
     ).json()
     setSate(res)
   } catch (error) {
