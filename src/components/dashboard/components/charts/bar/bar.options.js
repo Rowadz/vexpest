@@ -17,18 +17,18 @@ const options = (categories) => ({
     crosshair: true
   },
   tooltip: {
-    headerFormat: '<span style="font-size:10px">Info</span><table>',
+    cursor: 'pointer',
+    headerFormat: '<span style="font-size:10px">Info</span><br />',
     pointFormat:
-      '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-      '<td style="padding:0"><b>{point.y}</b> repo</td></tr>',
-    footerFormat: '</table>',
-    shared: true,
+      '<span style="color:{series.color};padding:0">{series.name}</span>: <b>{point.y}</b> repo',
+    shared: false,
     useHTML: true
   },
   plotOptions: {
     column: {
       pointPadding: 0.2,
-      borderWidth: 0
+      borderWidth: 0,
+      cursor: 'pointer'
     }
   }
 })
