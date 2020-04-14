@@ -97,11 +97,20 @@ const dashboardPage = (data) => (
 
 const getData = async (setSate) => {
   try {
-    const res = await (
-      await fetch(
-        'https://api.github.com/users/MohammedAl-Rowad/repos?per_page=1000'
-      )
-    ).json()
+    let res = []
+    for (const i of [...Array(10).keys()]) {
+      const data = await (
+        await fetch(
+          `https://api.github.com/users/bradtraversy/repos?per_page=1000&page=${
+            i + 1
+          }`
+        )
+      ).json()
+      if (data.length === 0) break
+      res.push(...data)
+      console.log(i)
+    }
+    console.log(res)
     setSate(res)
   } catch (error) {
     console.log(error)

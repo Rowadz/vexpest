@@ -23,7 +23,7 @@ export default function DragDrop({ child, data, ...reset }) {
   return (
     <Rnd
       minHeight={height}
-      maxHeight={height}
+      // maxHeight={height}
       minWidth={'50%'}
       style={{ background: '#181818', boxShadow: '0px 0px 10px #595959' }}
       onResize={(e, direction, ref, delta, position) => {

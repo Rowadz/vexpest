@@ -10,6 +10,12 @@ export default function Spinner() {
           <div style={{ padding: '10px' }}>
             <wired-spinner spinning duration="1000"></wired-spinner>
           </div>
+          <div>
+            <b>
+              This might take some time please wait we are traversing through
+              the api pages, we will only go to 10 pages...
+            </b>
+          </div>
         </section>
       </Col>
     </Row>
