@@ -19,15 +19,15 @@ export default function Dashboard() {
     getData(setSate.bind(Dashboard))
   }, [])
   let page = null
+  let dialog = null
   if (!state.data) {
     page = <Spinner />
   } else {
     page = dashboardPage(state.data)
   }
-  return (
-    <section>
-      {page}
-      <wired-dialog open={state.err}>
+  if (state.err) {
+    dialog = (
+      <wired-dialog open={!state.err} elevation={5}>
         <h1>Oops! :(</h1>
         <p>
           <b>
@@ -44,6 +44,13 @@ export default function Dashboard() {
           {/* <wired-button id="closeDialog">Close dialog</wired-button> */}
         </div>
       </wired-dialog>
+    )
+  }
+  console.log(state)
+  return (
+    <section>
+      {page}
+      {dialog}
     </section>
   )
 }
@@ -131,8 +138,9 @@ const getData = async (setSate) => {
       if (data.length === 0) break
       res.push(...data)
     }
-    setSate(res)
+    setSate({ data: res, err: false })
   } catch (error) {
+    console.error(error)
     setSate({ err: true })
   }
 }
