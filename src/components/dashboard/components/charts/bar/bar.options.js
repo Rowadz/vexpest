@@ -13,7 +13,7 @@ const options = (categories) => ({
     enabled: false
   },
   xAxis: {
-    categories,
+    categories: [...categories],
     crosshair: true
   },
   tooltip: {

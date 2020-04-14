@@ -46,12 +46,17 @@ const languageCounter = (data = []) => {
       counter[language] = (counter[language] || 0) + 1
     })
 
+  const keys = Object.keys(counter)
   return {
-    languages: Object.keys(counter),
-    values: Object.entries(counter).map(([key, val]) => ({
-      name: key,
-      data: [val]
-    }))
+    languages: keys,
+    values: keys.map((key) => {
+      const holder = Array.from({ length: keys.length }).fill(0)
+      holder[keys.indexOf(key)] = counter[key]
+      return {
+        name: key,
+        data: holder
+      }
+    })
   }
 }
 
