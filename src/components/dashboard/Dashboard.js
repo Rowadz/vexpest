@@ -11,19 +11,41 @@ import Worldcould from './components/charts/worldcloud/Wordcould'
 import Bar from './components/charts/bar/Bar'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
+import { WiredDialog } from 'wired-dialog'
 
 export default function Dashboard() {
-  const [state, setSate] = useState(null)
+  const [state, setSate] = useState({ data: null, err: false })
   useEffect(() => {
     getData(setSate.bind(Dashboard))
   }, [])
   let page = null
-  if (!state) {
+  if (!state.data) {
     page = <Spinner />
   } else {
-    page = dashboardPage(state)
+    page = dashboardPage(state.data)
   }
-  return <section>{page}</section>
+  return (
+    <section>
+      {page}
+      <wired-dialog open={state.err}>
+        <h1>Oops! :(</h1>
+        <p>
+          <b>
+            looks like we sent too many request, plz come back later after 1
+            hour. ( most likely )
+          </b>
+          {/* aka we sent more than one request in 1 hour */}
+        </p>
+        <p>
+          or something I have no idea about happened and my code does not handle
+          it.
+        </p>
+        <div style={{ textAlign: 'center', padding: '30px 16px 16px' }}>
+          {/* <wired-button id="closeDialog">Close dialog</wired-button> */}
+        </div>
+      </wired-dialog>
+    </section>
+  )
 }
 
 const dashboardPage = (data) => (
@@ -98,7 +120,7 @@ const dashboardPage = (data) => (
 const getData = async (setSate) => {
   try {
     let res = []
-    for (const i of [...Array(10).keys()]) {
+    for (const i of [...Array(1).keys()]) {
       const data = await (
         await fetch(
           `https://api.github.com/users/bradtraversy/repos?per_page=1000&page=${
@@ -108,12 +130,9 @@ const getData = async (setSate) => {
       ).json()
       if (data.length === 0) break
       res.push(...data)
-      console.log(i)
     }
-    console.log(res)
     setSate(res)
   } catch (error) {
-    console.log(error)
-    alert('Error while fetching data.. :(')
+    setSate({ err: true })
   }
 }
