@@ -13,7 +13,7 @@ export default function Spinner() {
           <div>
             <b>
               This might take some time please wait we are traversing through
-              the api pages, we will only go to 10 pages...
+              the api pages, we will only go to 10 pages (1000 repo)...
             </b>
           </div>
         </section>

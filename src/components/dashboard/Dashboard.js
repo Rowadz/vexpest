@@ -17,9 +17,11 @@ import Spinner from './components/Spinner'
 import { WiredDialog } from 'wired-dialog'
 
 export default function Dashboard() {
+  const query = new URLSearchParams(window.location.search)
+  const name = query.get('name')
   const [state, setSate] = useState({ data: null, err: false })
   useEffect(() => {
-    getData(setSate.bind(Dashboard))
+    getData(setSate.bind(Dashboard), name)
   }, [])
   let page = null
   let dialog = null
@@ -49,7 +51,6 @@ export default function Dashboard() {
       </wired-dialog>
     )
   }
-  console.log(state)
   return (
     <section>
       {page}
@@ -143,13 +144,13 @@ const dashboardPage = (data) => (
   </section>
 )
 
-const getData = async (setSate) => {
+const getData = async (setSate, name) => {
   try {
     let res = []
-    for (const i of [...Array(1).keys()]) {
+    for (const i of [...Array(10).keys()]) {
       const data = await (
         await fetch(
-          `https://api.github.com/users/laravel/repos?per_page=1000&page=${
+          `https://api.github.com/users/${name}/repos?per_page=1000&page=${
             i + 1
           }`
         )
