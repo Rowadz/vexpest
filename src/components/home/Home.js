@@ -11,7 +11,7 @@ export default function Home() {
     setState(
       <Redirect
         to={{
-          pathname: '/dashboard',
+          pathname: '/vexpest/dashboard',
           search: `?name=${document.getElementById('textarea-name').value}`
         }}
       >
