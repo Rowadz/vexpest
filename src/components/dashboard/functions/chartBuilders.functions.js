@@ -22,6 +22,12 @@ const starsTotal = (data = []) =>
     data.reduce((acc, curr) => acc + (curr.stargazers_count || 0), 0)
   )
 
+const archivedReposCount = (data = []) =>
+  formatNumber(data.filter(({ archived }) => archived).length)
+
+const notArchivedReposCount = (data = []) =>
+  formatNumber(data.filter(({ archived }) => !archived).length)
+
 const forkedTotal = (data = []) =>
   formatNumber(data.reduce((acc, curr) => acc + (curr.forks_count || 0), 0))
 
@@ -71,5 +77,7 @@ export {
   mapToArea,
   starsTotal,
   forkedTotal,
-  languageCounter
+  languageCounter,
+  archivedReposCount,
+  notArchivedReposCount
 }

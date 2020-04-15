@@ -5,6 +5,8 @@ import KpiForks from './components/charts/KPI/KpiForks'
 import KpiRepos from './components/charts/KPI/KpiRepos'
 import KpiStars from './components/charts/KPI/KpiStars'
 import KpiForksTotal from './components/charts/KPI/KpiForksTotal'
+import KpiArchived from './components/charts/KPI/KpiArchived'
+import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
 import Pie from './components/charts/pie/Pie'
 import Area from './components/charts/area/Area'
 import Worldcould from './components/charts/worldcloud/Wordcould'
@@ -70,6 +72,12 @@ const dashboardPage = (data) => (
       </Col>
       <Col xs={12} sm={12} md={6} lg={6}>
         <KpiForksTotal data={data} />
+      </Col>
+      <Col xs={12} sm={12} md={6} lg={6}>
+        <KpiArchived data={data} />
+      </Col>
+      <Col xs={12} sm={12} md={6} lg={6}>
+        <KpiNotArchived data={data} />
       </Col>
       <Col xs={12} sm={12} md={6} lg={6}>
         <DragDrop child={<Worldcould />} y={70} x={0} data={data} />
