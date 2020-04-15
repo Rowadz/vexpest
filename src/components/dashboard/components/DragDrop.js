@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import { Rnd } from 'react-rnd'
 
-export default function DragDrop({ child, data, ...reset }) {
+export default function DragDrop({
+  child,
+  data,
+  resize,
+  disableDragging,
+  ...reset
+}) {
   const [state, setState] = useState({
     x: reset.x,
     y: reset.y,
@@ -23,7 +29,8 @@ export default function DragDrop({ child, data, ...reset }) {
   return (
     <Rnd
       minHeight={height}
-      // maxHeight={height}
+      disableDragging={disableDragging || false}
+      maxHeight={resize ? height : null}
       minWidth={'50%'}
       style={{ background: '#181818', boxShadow: '0px 0px 10px #595959' }}
       onResize={(e, direction, ref, delta, position) => {

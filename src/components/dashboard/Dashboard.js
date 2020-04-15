@@ -11,6 +11,7 @@ import Pie from './components/charts/pie/Pie'
 import Area from './components/charts/area/Area'
 import Worldcould from './components/charts/worldcloud/Wordcould'
 import Bar from './components/charts/bar/Bar'
+import RepoTable from './components/tables/RepoTable'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 import { WiredDialog } from 'wired-dialog'
@@ -128,6 +129,16 @@ const dashboardPage = (data) => (
       <Col xs={12} sm={12} md={6} lg={6}>
         <DragDrop child={<Bar />} y={1870} x={10} data={data} />
       </Col>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <DragDrop
+          child={<RepoTable />}
+          y={2470}
+          disableDragging={true}
+          x={0}
+          data={data}
+          resize={false}
+        />
+      </Col>
     </Row>
   </section>
 )
@@ -138,7 +149,7 @@ const getData = async (setSate) => {
     for (const i of [...Array(1).keys()]) {
       const data = await (
         await fetch(
-          `https://api.github.com/users/bradtraversy/repos?per_page=1000&page=${
+          `https://api.github.com/users/laravel/repos?per_page=1000&page=${
             i + 1
           }`
         )

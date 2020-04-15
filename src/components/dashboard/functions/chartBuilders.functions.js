@@ -79,5 +79,6 @@ export {
   forkedTotal,
   languageCounter,
   archivedReposCount,
-  notArchivedReposCount
+  notArchivedReposCount,
+  formatNumber
 }
