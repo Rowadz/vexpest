@@ -4,6 +4,8 @@ A small & simple react.js app that generates a dashboard based on your github pu
 
 view it [here](https://mohammedal-rowad.github.io/vexpest/)
 
+how to install it [here](https://github.com/MohammedAl-Rowad/vexpest/tree/code)
+
 # Libraries used
 
 <img src="img0.png" >
