@@ -75,7 +75,7 @@ const graphNodesLinks = (data) => {
       id: '0',
       name: 'You',
       itemStyle: { normal: { color: '#3C6E7F' } },
-      symbolSize: 5,
+      symbolSize: 20,
       x: -266.82776,
       y: 299.6904,
       attributes: { modularity_class: 0 },
@@ -92,24 +92,30 @@ const graphNodesLinks = (data) => {
   ]
   console.log({ nodes: nodes.length, links: links.length, data: data.length })
   const categories = ['You']
-  data.forEach(({ name, stargazers_count }, i) => {
-    nodes[i + 1] = {
-      ...nodes[i + 1],
-      id: `${i + 1}`,
-      name,
-      symbolSize: stargazers_count,
-      label: {
-        show: true,
-      },
+  data.forEach(
+    ({ name, stargazers_count, size, forks_count, language, fork }, i) => {
+      nodes[i + 1] = {
+        ...nodes[i + 1],
+        id: `${i + 1}`,
+        name,
+        symbolSize: formatNumber(stargazers_count),
+        size: formatNumber(size / 1000),
+        forkes: formatNumber(forks_count),
+        isFork: fork,
+        language,
+        label: {
+          show: true,
+        },
+      }
+      links.push({
+        id: `${i + 1}`,
+        source: `${0}`,
+        target: `${i + 1}`,
+        lineStyle: { normal: {} },
+      })
+      categories.push(name)
     }
-    links.push({
-      id: `${i + 1}`,
-      source: `${0}`,
-      target: `${i + 1}`,
-      lineStyle: { normal: {} },
-    })
-    categories.push(name)
-  })
+  )
   return { nodes, links, categories }
 }
 

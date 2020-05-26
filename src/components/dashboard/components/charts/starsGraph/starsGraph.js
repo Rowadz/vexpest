@@ -27,7 +27,7 @@ const optionsMerge = (data, y, tooltip, mapper, title, legend) => {
     backgroundColor: 'transparent',
     height: '700px',
     title: {
-      text: 'Stars & Repos',
+      text: 'Info Graph',
       //   subtext: 'Default layout',
       top: 'top',
       left: 'center',
@@ -35,11 +35,11 @@ const optionsMerge = (data, y, tooltip, mapper, title, legend) => {
     },
     tooltip: {
       formatter: ({ data }) => {
-        const { name, symbolSize } = data
+        const { name, symbolSize, size, forkes, language, isFork } = data
         return symbolSize
           ? name === 'You'
             ? 'This is you!'
-            : `☆ ${name} -> ${symbolSize} ☆`
+            : `☆ ${name}: ${symbolSize} ☆ <br/>Size in MB: <b>${size}</b><br/>Forkes: ${forkes}<br/>Language: ${language}<br/> Is Fork: ${isFork}`
           : ''
       },
     },
