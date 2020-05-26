@@ -1,17 +1,17 @@
 const options = {
   title: {
-    text: 'Stars by Repository'
+    text: 'Stars by Repository',
   },
   subtitle: {
-    text: 'Source: GitHub public API'
+    text: 'Source: GitHub public API',
   },
   chart: {
-    height: 500,
+    // height: 500,
     backgroundColor: null,
     plotBackgroundColor: null,
     plotBorderWidth: null,
     plotShadow: false,
-    type: 'pie'
+    type: 'pie',
     // width: '100vw'
   },
 
@@ -21,45 +21,45 @@ const options = {
     layout: 'vertical',
     navigation: {
       style: {
-        color: '#fff'
-      }
-    }
+        color: '#fff',
+      },
+    },
   },
   plotOptions: {
     pie: {
       allowPointSelect: true,
       cursor: 'pointer',
       dataLabels: {
-        enabled: true
+        enabled: true,
       },
-      showInLegend: true
-    }
+      showInLegend: true,
+    },
   },
   credits: {
-    enabled: false
+    enabled: false,
   },
   responsive: {
     rules: [
       {
         condition: {
-          maxWidth: 500
+          maxWidth: 500,
         },
         plotOptions: {
           pie: {
-            showInLegend: false
-          }
+            showInLegend: false,
+          },
         },
         chartOptions: {
           legend: {
-            enabled: false
-          }
-        }
-      }
-    ]
+            enabled: false,
+          },
+        },
+      },
+    ],
   },
   tooltip: {
-    pointFormat: 'number of 🌟: <b>{point.y}</b>'
-  }
+    pointFormat: 'number of 🌟: <b>{point.y}</b>',
+  },
 }
 
 export { options }

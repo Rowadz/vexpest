@@ -1,8 +1,11 @@
+import { graphPlaceHolder } from '../components/charts/starsGraph/starsGraph.options'
+
 const mapPieData = (data = [], y = 'stargazers_count', mapper) =>
   data
     .map((obj) => ({
       name: obj.name,
-      y: mapper ? mapper(obj[y]) : obj[y]
+      y: mapper ? mapper(obj[y]) : obj[y],
+      value: mapper ? mapper(obj[y]) : obj[y],
     }))
     .filter(({ y }) => y > 0)
 
@@ -10,7 +13,7 @@ const mapWordcloudData = (data = []) =>
   data.map(({ watchers_count, name, html_url }) => ({
     name,
     weight: 1,
-    html_url
+    html_url,
   }))
 
 const forkedReposCount = (data = []) =>
@@ -60,10 +63,54 @@ const languageCounter = (data = []) => {
       holder[keys.indexOf(key)] = counter[key]
       return {
         name: key,
-        data: holder
+        data: holder,
       }
-    })
+    }),
   }
+}
+
+const graphNodesLinks = (data) => {
+  const nodes = [
+    {
+      id: '0',
+      name: 'You',
+      itemStyle: { normal: { color: '#3C6E7F' } },
+      symbolSize: 5,
+      x: -266.82776,
+      y: 299.6904,
+      attributes: { modularity_class: 0 },
+    },
+    ...graphPlaceHolder.nodes.slice(1, data.length + 1),
+  ]
+  const links = [
+    {
+      id: `${0}`,
+      source: `${0}`,
+      target: `${1}`,
+      lineStyle: { normal: {} },
+    },
+  ]
+  console.log({ nodes: nodes.length, links: links.length, data: data.length })
+  const categories = ['You']
+  data.forEach(({ name, stargazers_count }, i) => {
+    nodes[i + 1] = {
+      ...nodes[i + 1],
+      id: `${i + 1}`,
+      name,
+      symbolSize: stargazers_count,
+      label: {
+        show: true,
+      },
+    }
+    links.push({
+      id: `${i + 1}`,
+      source: `${0}`,
+      target: `${i + 1}`,
+      lineStyle: { normal: {} },
+    })
+    categories.push(name)
+  })
+  return { nodes, links, categories }
 }
 
 const formatNumber = (num) =>
@@ -80,5 +127,6 @@ export {
   languageCounter,
   archivedReposCount,
   notArchivedReposCount,
-  formatNumber
+  formatNumber,
+  graphNodesLinks,
 }

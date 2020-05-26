@@ -15,6 +15,8 @@ import RepoTable from './components/tables/RepoTable'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 import { WiredDialog } from 'wired-dialog'
+import { Base64 } from 'js-base64'
+import StarsGraph from './components/charts/starsGraph/starsGraph'
 
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)
@@ -59,92 +61,42 @@ export default function Dashboard() {
   )
 }
 
-const dashboardPage = (data) => (
-  <section>
-    {/* <RadioButtons></RadioButtons> */}
-    <Row>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiRepos data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiForks data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiStars data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiForksTotal data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiArchived data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <KpiNotArchived data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <DragDrop child={<Worldcould />} y={70} x={0} data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <DragDrop
-          child={<Pie />}
-          y={70}
-          x={10}
-          data={data}
-          yPie={'size'}
-          mapper={(d) => d / 1000}
-          tooltip={{ pointFormat: 'Size in MB: <b>{point.y}</b>' }}
-          title={'Repository by Size in megabyte'}
-          legend={false}
-        />
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} sm={12} md={12} lg={12}>
-        <DragDrop
-          child={<Pie />}
-          y={670}
-          x={0}
-          data={data}
-          yPie={'stargazers_count'}
-        />
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} sm={12} md={12} lg={12}>
-        <DragDrop
-          child={<Pie />}
-          y={1270}
-          x={0}
-          data={data}
-          yPie={'forks_count'}
-          tooltip={{ pointFormat: 'forks count ⛓️: <b>{point.y}</b>' }}
-          title={'Forks by Repository'}
-          // legend={false}
-        />
-      </Col>
-    </Row>
-    <Row>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <DragDrop child={<Area />} y={1870} x={0} data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6}>
-        <DragDrop child={<Bar />} y={1870} x={10} data={data} />
-      </Col>
-      <Col xs={12} sm={12} md={12} lg={12}>
-        <DragDrop
-          child={<RepoTable />}
-          y={2470}
-          disableDragging={true}
-          x={0}
-          data={data}
-          resize={false}
-        />
-      </Col>
-    </Row>
-  </section>
-)
+const dashboardPage = (data) => {
+  return (
+    <section>
+      <Row>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiRepos data={data} />
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiForks data={data} />
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiStars data={data} />
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiForksTotal data={data} />
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiArchived data={data} />
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={6}>
+          <KpiNotArchived data={data} />
+        </Col>
+      </Row>
+      <Row className="pt-4">
+        <Col xs={12} sm={12} md={12} lg={12} style={{ height: '500px' }}>
+          <StarsGraph data={data} />
+        </Col>
+      </Row>
+    </section>
+  )
+}
 
 const getData = async (setSate, name) => {
+  let headers = new Headers()
+  headers.append('Authorization', 'Basic' + Base64.encode(`fuckyou`))
+
   try {
     let res = []
     for (const i of [...Array(10).keys()]) {
@@ -152,7 +104,8 @@ const getData = async (setSate, name) => {
         await fetch(
           `https://api.github.com/users/${name}/repos?per_page=1000&page=${
             i + 1
-          }`
+          }`,
+          { headers }
         )
       ).json()
       if (data.length === 0) break
