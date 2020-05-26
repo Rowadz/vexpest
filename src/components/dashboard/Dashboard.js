@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import RadioButtons from './components/RadioButtons'
-import DragDrop from './components/DragDrop'
 import KpiForks from './components/charts/KPI/KpiForks'
 import KpiRepos from './components/charts/KPI/KpiRepos'
 import KpiStars from './components/charts/KPI/KpiStars'
 import KpiForksTotal from './components/charts/KPI/KpiForksTotal'
 import KpiArchived from './components/charts/KPI/KpiArchived'
 import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
-import Pie from './components/charts/pie/Pie'
-import Area from './components/charts/area/Area'
-import Worldcould from './components/charts/worldcloud/Wordcould'
-import Bar from './components/charts/bar/Bar'
 import RepoTable from './components/tables/RepoTable'
+import Area from './components/charts/area/Area'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
 import { WiredDialog } from 'wired-dialog'
@@ -85,7 +80,12 @@ const dashboardPage = (data) => {
         </Col>
       </Row>
       <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12} style={{ height: '500px' }}>
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <Area data={data} />
+        </Col>
+      </Row>
+      <Row className="pt-4">
+        <Col xs={12} sm={12} md={12} lg={12}>
           <StarsGraph data={data} />
         </Col>
       </Row>
@@ -95,7 +95,7 @@ const dashboardPage = (data) => {
 
 const getData = async (setSate, name) => {
   let headers = new Headers()
-  headers.append('Authorization')
+  headers.append('Authorization', 'Basic' + Base64.encode(``))
 
   try {
     let res = []

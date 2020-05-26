@@ -1,42 +1,49 @@
 import React from 'react'
 import { mapToArea } from '../../../functions/chartBuilders.functions'
-import { options } from './area.options'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import ReactEcharts from 'echarts-for-react'
 
-export default function Area({ width, height, data }) {
+export default function Area({ data }) {
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={optionsMerge(width, height, data)}
-      allowChartUpdate={true}
+    <ReactEcharts
+      style={{ height: '700px', width: '100%' }}
+      theme={'dark'}
+      option={optionsMerge(data)}
     />
   )
 }
 
-const optionsMerge = (width, height, data) => {
-  const { years, dataToViz } = mapToArea(data)
-  const op = options(years[0])
+const optionsMerge = (data) => {
+  const { dataToViz, xAxis } = mapToArea(data)
   return {
-    ...op,
-    chart: {
-      ...op.chart,
-      height,
-      width: isNaN(width) ? null : width
+    title: {
+      text: 'Stars By Repo',
+      top: 'top',
+      left: 'center',
+      color: '#fff',
     },
+    backgroundColor: 'transparent',
     xAxis: {
-      allowDecimals: false,
-      title: {
-        text: 'Years'
+      type: 'category',
+      data: xAxis,
+      axisLabel: {
+        rotate: 45,
       },
-      categories: years
+    },
+    tooltip: {
+      show: true,
+      trigger: 'axis',
     },
     yAxis: {
-      title: {
-        text: 'Nuclear weapon states'
-      }
+      type: 'value',
     },
-
-    series: [{ name: 'Repositories', data: dataToViz }]
+    series: [
+      {
+        color: ['#3C6E7F'],
+        data: dataToViz,
+        type: 'line',
+        smooth: true,
+        areaStyle: {},
+      },
+    ],
   }
 }

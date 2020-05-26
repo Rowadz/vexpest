@@ -1,26 +1,18 @@
 import React from 'react'
 import { graphNodesLinks } from '../../../functions/chartBuilders.functions'
-// import { options } from './pie.options'
 import ReactEcharts from 'echarts-for-react'
 
-export default function StarsGraph({
-  data,
-  y,
-  tooltip,
-  mapper,
-  title,
-  legend,
-}) {
+export default function StarsGraph({ data }) {
   return (
     <ReactEcharts
       style={{ height: '700px', width: '100%' }}
       theme={'dark'}
-      option={optionsMerge(data, y, tooltip, mapper, title, legend)}
+      option={optionsMerge(data)}
     />
   )
 }
 
-const optionsMerge = (data, y, tooltip, mapper, title, legend) => {
+const optionsMerge = (data) => {
   const { links, nodes, categories } = graphNodesLinks(data)
   console.log({ links, nodes, categories })
   return {
@@ -35,11 +27,19 @@ const optionsMerge = (data, y, tooltip, mapper, title, legend) => {
     },
     tooltip: {
       formatter: ({ data }) => {
-        const { name, symbolSize, size, forkes, language, isFork } = data
+        const {
+          name,
+          symbolSize,
+          size,
+          forkes,
+          language,
+          isFork,
+          starCount,
+        } = data
         return symbolSize
           ? name === 'You'
             ? 'This is you!'
-            : `☆ ${name}: ${symbolSize} ☆ <br/>Size in MB: <b>${size}</b><br/>Forkes: ${forkes}<br/>Language: ${language}<br/> Is Fork: ${isFork}`
+            : `☆ ${name}: ${starCount} ☆ <br/>Size in MB: <b>${size}</b><br/>Forkes: ${forkes}<br/>Language: ${language}<br/> Is Fork: ${isFork}`
           : ''
       },
     },

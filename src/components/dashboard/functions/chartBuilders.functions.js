@@ -1,5 +1,5 @@
 import { graphPlaceHolder } from '../components/charts/starsGraph/starsGraph.options'
-
+import rn from 'random-number'
 const mapPieData = (data = [], y = 'stargazers_count', mapper) =>
   data
     .map((obj) => ({
@@ -35,16 +35,21 @@ const forkedTotal = (data = []) =>
   formatNumber(data.reduce((acc, curr) => acc + (curr.forks_count || 0), 0))
 
 const mapToArea = (data) => {
-  const set = new Set()
-  const map = new Map()
-  data.forEach(({ created_at }) => set.add(new Date(created_at).getFullYear()))
-  const years = Array.from(set).sort((a, b) => a - b)
-  data.forEach(({ created_at }) => {
-    const year = new Date(created_at).getFullYear()
-    map.set(year, (map.get(year) || 0) + 1)
-  })
-  const dataToViz = years.map((year) => map.get(year))
-  return { years, dataToViz }
+  data = data.reduce(
+    (prev, { name, stargazers_count }) => ({
+      ...prev,
+      [name]: stargazers_count,
+    }),
+    {}
+  )
+  const sorted = Object.keys(data)
+    .sort((a, b) => data[a] - data[b])
+    .filter((key) => data[key])
+
+  return {
+    xAxis: sorted,
+    dataToViz: sorted.map((key) => data[key]),
+  }
 }
 
 const languageCounter = (data = []) => {
@@ -90,21 +95,51 @@ const graphNodesLinks = (data) => {
       lineStyle: { normal: {} },
     },
   ]
-  console.log({ nodes: nodes.length, links: links.length, data: data.length })
   const categories = ['You']
+  const maxStargazersCount = Math.max(
+    ...data.map(({ stargazers_count }) => stargazers_count)
+  )
+  const scale = (num, in_min, in_max, out_min, out_max) =>
+    ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+
+  const minStargazersCount = Math.min(
+    ...data.map(({ stargazers_count }) => stargazers_count)
+  )
   data.forEach(
     ({ name, stargazers_count, size, forks_count, language, fork }, i) => {
       nodes[i + 1] = {
         ...nodes[i + 1],
         id: `${i + 1}`,
         name,
-        symbolSize: formatNumber(stargazers_count),
+        x:
+          nodes[i + 1] && nodes[i + 1].x
+            ? nodes[i + 1].x
+            : rn({ min: -100, max: 300 }),
+        y:
+          nodes[i + 1] && nodes[i + 1].y
+            ? nodes[i + 1].y
+            : rn({ min: -100, max: 200 }),
+        symbolSize: scale(
+          stargazers_count,
+          minStargazersCount,
+          maxStargazersCount,
+          3,
+          150
+        ),
+        starCount: formatNumber(stargazers_count),
         size: formatNumber(size / 1000),
         forkes: formatNumber(forks_count),
         isFork: fork,
         language,
         label: {
-          show: true,
+          show:
+            scale(
+              stargazers_count,
+              minStargazersCount,
+              maxStargazersCount,
+              3,
+              150
+            ) > 100,
         },
       }
       links.push({
