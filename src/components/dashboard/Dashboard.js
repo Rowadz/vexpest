@@ -12,6 +12,8 @@ import Spinner from './components/Spinner'
 import { WiredDialog } from 'wired-dialog'
 import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
+import Line from './components/charts/line/line'
+import Bar from './components/charts/bar/Bar'
 
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)
@@ -81,7 +83,17 @@ const dashboardPage = (data) => {
       </Row>
       <Row className="pt-4">
         <Col xs={12} sm={12} md={12} lg={12}>
+          <Line data={data} />
+        </Col>
+      </Row>
+      <Row className="pt-4">
+        <Col xs={12} sm={12} md={12} lg={12}>
           <Area data={data} />
+        </Col>
+      </Row>
+      <Row className="pt-4">
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <Bar data={data} />
         </Col>
       </Row>
       <Row className="pt-4">
@@ -95,7 +107,7 @@ const dashboardPage = (data) => {
 
 const getData = async (setSate, name) => {
   let headers = new Headers()
-  headers.append('Authorization')
+  headers.append('Authorization', 'Basic' + Base64.encode(``))
 
   try {
     let res = []

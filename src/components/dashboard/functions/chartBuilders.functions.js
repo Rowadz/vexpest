@@ -81,6 +81,7 @@ const languageCounter = (data = []) => {
       holder[keys.indexOf(key)] = counter[key]
       return {
         name: key,
+        type: 'bar',
         data: holder,
       }
     }),

@@ -1,30 +1,89 @@
 import React from 'react'
 import { languageCounter } from '../../../functions/chartBuilders.functions'
-import HighchartsReact from 'highcharts-react-official'
-import { options } from './bar.options'
-import Highcharts from 'highcharts'
-require('highcharts/modules/wordcloud')(Highcharts)
-require('highcharts/modules/boost')(Highcharts)
+import ReactEcharts from 'echarts-for-react'
 
-export default function Bar({ width, height, data }) {
+export default function Area({ data }) {
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={optionsMerge(width, height, data)}
-      allowChartUpdate={true}
+    <ReactEcharts
+      style={{ height: '500px', width: '100%' }}
+      theme={'dark'}
+      option={optionsMerge(data)}
     />
   )
 }
-const optionsMerge = (width, height, data) => {
+
+const optionsMerge = (data) => {
   const { languages, values } = languageCounter(data)
-  const op = options(languages)
+  console.log(values)
   return {
-    ...op,
-    chart: {
-      ...op.chart,
-      height,
-      width: isNaN(width) ? null : width
+    title: {
+      text: 'Languages Count By Repo',
+      top: 'top',
+      left: 'center',
+      color: '#fff',
     },
-    series: values
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+      },
+    },
+    legend: {
+      data: languages,
+      bottom: 'bottom',
+    },
+    color: [
+      '#3C6E7F',
+      '#5EB4E6',
+      '#294466',
+      '#398CBF',
+      '#1F598C',
+      '#143C8C',
+      '#60B9D2',
+      '#01485B',
+      '#0893B8',
+      '#C8E7EF',
+      '#075473',
+      '#092B40',
+      '#032340',
+      '#8BFAFF',
+      '#3E84E6',
+      '#27528F',
+      '#2A599C',
+    ],
+    tooltip: {
+      show: true,
+      trigger: 'axis',
+      formatter: (object) => {
+        const x = Object.values(object).filter(({ value }) => +value)
+        if (x[0]) {
+          const [{ marker, name, value }] = x
+          return `${marker} ${name} ${value}`
+        }
+        return ''
+      },
+    },
+    // grid: {
+    //   left: '3%',
+    //   right: '4%',
+    //   bottom: '3%',
+    //   containLabel: true,
+    // },
+    xAxis: {
+      type: 'value',
+      splitLine: {
+        show: false,
+      },
+      boundaryGap: [0, 0.01],
+    },
+    yAxis: {
+      type: 'category',
+      data: languages,
+      splitLine: {
+        show: false,
+      },
+    },
+    series: values,
   }
 }
