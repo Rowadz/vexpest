@@ -1,11 +1,11 @@
 import React from 'react'
-import { mapToArea } from '../../../functions/chartBuilders.functions'
+import { mapToLine } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
 
-export default function Area({ data }) {
+export default function Line({ data }) {
   return (
     <ReactEcharts
-      style={{ height: '700px', width: '100%' }}
+      style={{ height: '500px', width: '100%' }}
       theme={'dark'}
       option={optionsMerge(data)}
     />
@@ -13,7 +13,7 @@ export default function Area({ data }) {
 }
 
 const optionsMerge = (data) => {
-  const { dataToViz, xAxis } = mapToArea(data)
+  const { dataToViz, years } = mapToLine(data)
   return {
     title: {
       text: 'Stars By Repo',
@@ -24,10 +24,7 @@ const optionsMerge = (data) => {
     backgroundColor: 'transparent',
     xAxis: {
       type: 'category',
-      data: xAxis,
-      axisLabel: {
-        rotate: 45,
-      },
+      data: years,
       splitLine: {
         show: false,
       },
@@ -35,6 +32,9 @@ const optionsMerge = (data) => {
     tooltip: {
       show: true,
       trigger: 'axis',
+      formatter: ([{ data: count, axisValue: year }]) => {
+        return `Created ${count} Repos in ${year}`
+      },
     },
     yAxis: {
       type: 'value',
@@ -44,11 +44,10 @@ const optionsMerge = (data) => {
     },
     series: [
       {
-        color: ['#3C6E7F'],
         data: dataToViz,
         type: 'line',
+        color: ['#3C6E7F'],
         smooth: true,
-        // areaStyle: {},
       },
     ],
   }

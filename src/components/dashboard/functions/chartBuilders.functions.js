@@ -52,6 +52,19 @@ const mapToArea = (data) => {
   }
 }
 
+const mapToLine = (data) => {
+  const set = new Set()
+  const map = new Map()
+  data.forEach(({ created_at }) => set.add(new Date(created_at).getFullYear()))
+  const years = Array.from(set).sort((a, b) => a - b)
+  data.forEach(({ created_at }) => {
+    const year = new Date(created_at).getFullYear()
+    map.set(year, (map.get(year) || 0) + 1)
+  })
+  const dataToViz = years.map((year) => map.get(year))
+  return { years, dataToViz }
+}
+
 const languageCounter = (data = []) => {
   const counter = {}
   data
@@ -170,4 +183,5 @@ export {
   notArchivedReposCount,
   formatNumber,
   graphNodesLinks,
+  mapToLine,
 }
