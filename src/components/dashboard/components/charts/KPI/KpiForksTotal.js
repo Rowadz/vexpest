@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
 import { forkedTotal } from '../../../functions/chartBuilders.functions'
-import { WiredCard } from 'wired-card'
+import { Panel } from 'rsuite'
 import { Row, Col } from 'react-grid-system'
 
 export default function KpiForksTotal({ data }) {
   const [count] = useState(forkedTotal(data))
   return (
-    <wired-card
-      elevation="3"
-      style={{ width: '100%', color: '#fff', textAlign: 'center' }}
-      fill={'#A64F03'}
-    >
-      <Row>
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <h1>{count} times his/her repos have been Forked</h1>
-        </Col>
-      </Row>
-    </wired-card>
+    <Row className="pt-1">
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <Panel
+          header="How Many Times His/Her Repos Have Been Forked"
+          shaded
+          style={{ boxShadow: '1px 1px 20px #3C6E7F' }}
+        >
+          <h1 className="center">{count} </h1>
+        </Panel>
+      </Col>
+    </Row>
   )
 }

@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
 import { archivedReposCount } from '../../../functions/chartBuilders.functions'
-import { WiredCard } from 'wired-card'
 import { Row, Col } from 'react-grid-system'
+import { Panel } from 'rsuite'
 
 export default function KpiArchived({ data }) {
   const [count] = useState(archivedReposCount(data))
   return (
-    <wired-card
-      elevation="3"
-      style={{ width: '100%', color: '#fff', textAlign: 'center' }}
-      fill={'#424370'}
-    >
-      <Row>
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <h1>{count} archived Repos Count</h1>
-        </Col>
-      </Row>
-    </wired-card>
+    <Row className="pt-1">
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <Panel
+          header="Archived Repos Count"
+          shaded
+          style={{ boxShadow: '1px 1px 20px #3C6E7F' }}
+        >
+          <h1 className="center">{count}</h1>
+        </Panel>
+      </Col>
+    </Row>
   )
 }

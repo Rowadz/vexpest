@@ -2,3 +2,11 @@
   padding: 18px 20px;
   display: inline-block;
 }
+
+.pt-1 {
+  padding-top: 0.5rem;
+}
+
+.center {
+  text-align: center;
+}
