@@ -95,7 +95,7 @@ const dashboardPage = (data) => {
 
 const getData = async (setSate, name) => {
   let headers = new Headers()
-  headers.append('Authorization', 'Basic' + Base64.encode(``))
+  headers.append('Authorization')
 
   try {
     let res = []

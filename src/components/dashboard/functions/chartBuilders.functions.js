@@ -99,8 +99,8 @@ const graphNodesLinks = (data) => {
   const maxStargazersCount = Math.max(
     ...data.map(({ stargazers_count }) => stargazers_count)
   )
-  const scale = (num, in_min, in_max, out_min, out_max) =>
-    ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+  const scale = (num, inMin, inMax, outMin, outMax) =>
+    ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
   const minStargazersCount = Math.min(
     ...data.map(({ stargazers_count }) => stargazers_count)
