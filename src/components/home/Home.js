@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
-import { WiredTextarea } from 'wired-textarea'
-import { WiredButton } from 'wired-button'
-import { Redirect } from 'react-router-dom'
-import Dashboard from '../dashboard/Dashboard'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { WiredTextarea } from 'wired-textarea';
+import { WiredButton } from 'wired-button';
+import { Redirect } from 'react-router-dom';
+import Dashboard from '../dashboard/Dashboard';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
-  const [name, setState] = useState(null)
+  const [name, setState] = useState(null);
   const taksim = (e) =>
     setState(
       <Redirect
         to={{
-          pathname: '/vexpest/dashboard',
-          search: `?name=${document.getElementById('textarea-name').value}`
+          pathname: '/dashboard',
+          search: `?name=${document.getElementById('textarea-name').value}`,
         }}
       >
         lorem
       </Redirect>
-    )
+    );
 
-  if (name) return name
+  if (name) return name;
 
   return (
     <section style={{ textAlign: 'center' }}>
@@ -38,5 +38,5 @@ export default function Home() {
         {/* </Link> */}
       </div>
     </section>
-  )
+  );
 }
