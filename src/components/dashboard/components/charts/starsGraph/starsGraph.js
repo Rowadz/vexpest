@@ -19,7 +19,7 @@ const optionsMerge = (data) => {
     height: '700px',
     title: {
       text: 'Info Graph',
-      //   subtext: 'Default layout',
+        subtext: 'you can scroll in here!',
       top: 'top',
       left: 'center',
       color: '#fff',
