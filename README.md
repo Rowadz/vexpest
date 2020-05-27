@@ -6,7 +6,7 @@ This project is built using react.js / react creata app, and it visualize the pu
 ```bash
 $ git clone https://github.com/MohammedAl-Rowad/vexpest.git
 $ cd vexpest
-$ git checkout code
+$ git checkout version_2
 $ npm i
 $ npm start
 ```
