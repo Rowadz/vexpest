@@ -49,7 +49,7 @@ const optionsMerge = (data) => {
       {
         color: ['#3C6E7F'],
         type: 'pie',
-        radius: '55%',
+        radius: checkIfMobile() ? '100%': '55%',
         center: ['50%', '50%'],
         data: toViz,
         roseType: 'radius',
