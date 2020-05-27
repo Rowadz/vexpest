@@ -1,7 +1,12 @@
 import React from 'react'
 import './App.css'
 import Home from './components/home/Home'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
 import { Container, Row, Col } from 'react-grid-system'
 import 'rsuite/dist/styles/rsuite-dark.css'
@@ -12,15 +17,25 @@ const { Item } = Nav
 function App() {
   return (
     <main>
-      <Navbar>
-        <Body>
-          <Nav>
-            <Item>🚀 VEXPEST 🚀</Item>
-          </Nav>
-        </Body>
-      </Navbar>
-      <Container>
-        <Router>
+      <Router>
+        <Navbar>
+          <Body>
+            <Nav>
+              <NavLink to="/about">
+                <Item>
+                  <span role="img" aria-label="random emoji I found">
+                    🚀
+                  </span>
+                  VEXPEST
+                  <span role="img" aria-label="random emoji I found">
+                    🚀
+                  </span>
+                </Item>
+              </NavLink>
+            </Nav>
+          </Body>
+        </Navbar>
+        <Container>
           <Switch>
             <Route path="/dashboard">
               <Row>
@@ -37,8 +52,8 @@ function App() {
               </Row>
             </Route>
           </Switch>
-        </Router>
-      </Container>
+        </Container>
+      </Router>
     </main>
   )
 }

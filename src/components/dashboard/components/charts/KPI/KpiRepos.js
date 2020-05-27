@@ -12,7 +12,6 @@ export default function KpiRepos({ data }) {
         <Panel
           header="Repositories Created (archive/active) Excluding Private Ones"
           shaded
-          style={{ boxShadow: '1px 1px 20px #3C6E7F' }}
         >
           <h1 className="center">{count} </h1>
         </Panel>

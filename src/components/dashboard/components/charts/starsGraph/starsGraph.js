@@ -14,7 +14,6 @@ export default function StarsGraph({ data }) {
 
 const optionsMerge = (data) => {
   const { links, nodes, categories } = graphNodesLinks(data)
-  console.log({ links, nodes, categories })
   return {
     backgroundColor: 'transparent',
     height: '700px',

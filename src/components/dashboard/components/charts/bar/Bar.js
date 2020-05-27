@@ -14,7 +14,6 @@ export default function Area({ data }) {
 
 const optionsMerge = (data) => {
   const { languages, values } = languageCounter(data)
-  console.log(values)
   return {
     title: {
       text: 'Languages Count By Repo',
@@ -23,15 +22,8 @@ const optionsMerge = (data) => {
       color: '#fff',
     },
     backgroundColor: 'transparent',
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
     legend: {
       data: languages,
-      bottom: 'bottom',
       type: 'scroll',
       orient: 'horizontal',
       bottom: 20,
@@ -59,13 +51,16 @@ const optionsMerge = (data) => {
       '#2A599C',
     ],
     tooltip: {
+      axisPointer: {
+        type: 'shadow',
+      },
       show: true,
       trigger: 'axis',
       formatter: (object) => {
         const x = Object.values(object).filter(({ value }) => +value)
         if (x[0]) {
           const [{ marker, name, value }] = x
-          return `${marker} ${name} ${value}`
+          return `${marker} ${name} repos count -> ${value}`
         }
         return ''
       },

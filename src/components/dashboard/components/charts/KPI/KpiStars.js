@@ -8,11 +8,7 @@ export default function KpiStars({ data }) {
   return (
     <Row className="pt-1">
       <Col xs={12} sm={12} md={12} lg={12}>
-        <Panel
-          header="Total Stars Count"
-          shaded
-          style={{ boxShadow: '1px 1px 20px #3C6E7F' }}
-        >
+        <Panel header="Total Stars Count" shaded>
           <h1 className="center">{count} </h1>
         </Panel>
       </Col>

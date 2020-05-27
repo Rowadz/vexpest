@@ -5,11 +5,10 @@ import KpiStars from './components/charts/KPI/KpiStars'
 import KpiForksTotal from './components/charts/KPI/KpiForksTotal'
 import KpiArchived from './components/charts/KPI/KpiArchived'
 import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
-import RepoTable from './components/tables/RepoTable'
 import Area from './components/charts/area/Area'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
-import { WiredDialog } from 'wired-dialog'
+import 'wired-dialog'
 import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
@@ -19,7 +18,7 @@ import Pie from './components/charts/pie/Pie'
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)
   const name = query.get('name')
-  const [state, setSate] = useState({ data: null, err: false })
+  const [state, setSate] = useState({ data: null, err: false, name: null })
   useEffect(() => {
     getData(setSate.bind(Dashboard), name)
   }, [])
@@ -113,7 +112,10 @@ const dashboardPage = (data) => {
 
 const getData = async (setSate, name) => {
   let headers = new Headers()
-  headers.append('Authorization', 'Basic' + Base64.encode(``))
+  // headers.append(
+  //   'Authorization',
+  //   'Basic' + Base64.encode(`username:password`)
+  // )
 
   try {
     let res = []
@@ -122,8 +124,8 @@ const getData = async (setSate, name) => {
         await fetch(
           `https://api.github.com/users/${name}/repos?per_page=1000&page=${
             i + 1
-          }`,
-          { headers }
+          }`
+          // { headers }
         )
       ).json()
       if (data.length === 0) break

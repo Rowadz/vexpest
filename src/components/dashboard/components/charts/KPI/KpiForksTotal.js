@@ -8,11 +8,7 @@ export default function KpiForksTotal({ data }) {
   return (
     <Row className="pt-1">
       <Col xs={12} sm={12} md={12} lg={12}>
-        <Panel
-          header="How Many Times His/Her Repos Have Been Forked"
-          shaded
-          style={{ boxShadow: '1px 1px 20px #3C6E7F' }}
-        >
+        <Panel header="How Many Times His/Her Repos Have Been Forked" shaded>
           <h1 className="center">{count} </h1>
         </Panel>
       </Col>

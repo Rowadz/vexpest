@@ -1,42 +1,35 @@
-import React, { useState } from 'react';
-import { WiredTextarea } from 'wired-textarea';
-import { WiredButton } from 'wired-button';
-import { Redirect } from 'react-router-dom';
-import Dashboard from '../dashboard/Dashboard';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Input, Button } from 'rsuite'
+import { useHistory } from 'react-router-dom'
 
 export default function Home() {
-  const [name, setState] = useState(null);
-  const taksim = (e) =>
-    setState(
-      <Redirect
-        to={{
-          pathname: '/dashboard',
-          search: `?name=${document.getElementById('textarea-name').value}`,
-        }}
-      >
-        lorem
-      </Redirect>
-    );
+  const [name] = useState(null)
+  const history = useHistory()
+  const taksim = (e) => {
+    history.push({
+      pathname: '/dashboard',
+      search: `?name=${document.getElementById('textarea-name').value}`,
+    })
+  }
 
-  if (name) return name;
+  if (name) return name
 
   return (
-    <section style={{ textAlign: 'center' }}>
+    <section>
       <div style={{ padding: '10px' }}>
-        <wired-textarea
-          placeholder="Github username"
-          rows="6"
+        <Input
+          componentClass="textarea"
+          rows={3}
+          style={{ resize: 'auto' }}
           id="textarea-name"
-        ></wired-textarea>
+          placeholder="Github username"
+        />
       </div>
-      <div style={{ padding: '10px', textAlign: 'center' }}>
-        {/* <Link to="/dashboard"> */}
-        <wired-button elevation="3" onClick={taksim}>
-          Get my dashbard
-        </wired-button>
-        {/* </Link> */}
+      <div style={{ padding: '10px' }}>
+        <Button appearance="ghost" onClick={taksim}>
+          Generate
+        </Button>
       </div>
     </section>
-  );
+  )
 }
