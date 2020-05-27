@@ -1,35 +1,41 @@
 const dateComparator = (date1, date2) => new Date(date1) - new Date(date2)
 const formatedNumberComparator = (num1, num2) =>
   +num1.split(',').join('') - +num2.split(',').join('')
+const sizeComparator = (num1, num2) => {
+  num1 = +num1.replace('MB', '').trim('')
+  num2 = +num2.replace('MB', '').trim('')
+  return num1 - num2
+}
 
 const columnDefs = [
   {
     headerName: 'Repository Name',
-    field: 'name'
+    field: 'name',
   },
   {
     headerName: 'Created At',
     field: 'created_at',
-    comparator: dateComparator
+    comparator: dateComparator,
   },
   {
     headerName: 'Updated At',
     field: 'updated_at',
-    comparator: dateComparator
+    comparator: dateComparator,
   },
   {
     headerName: 'Size',
-    field: 'size'
+    field: 'size',
+    comparator: sizeComparator,
   },
   {
     headerName: 'Stars Count',
     field: 'stargazers_count',
-    comparator: formatedNumberComparator
+    comparator: formatedNumberComparator,
   },
   {
     headerName: 'Watchers Count',
     field: 'watchers_count',
-    comparator: formatedNumberComparator
+    comparator: formatedNumberComparator,
   },
   {
     headerName: 'URL',
@@ -40,39 +46,41 @@ const columnDefs = [
       return `<a href="${value}" target="_blank" rel="noopener">${
         urlAsArr[urlAsArr.length - 1]
       }</a>`
-    }
+    },
   },
   {
     headerName: 'Is Forked?',
-    field: 'fork'
+    field: 'fork',
   },
   {
     headerName: 'Language',
-    field: 'language'
+    field: 'language',
   },
   {
     headerName: 'Description',
-    field: 'description'
+    field: 'description',
   },
   {
     headerName: 'Has Issues',
-    field: 'has_issues'
+    field: 'has_issues',
   },
   {
     headerName: 'Forks Count',
     field: 'forks_count',
-    comparator: formatedNumberComparator
+    comparator: formatedNumberComparator,
+    cellStyle: { color: '#fff', 'background-color': '#0f131a' },
   },
   {
     headerName: 'Open Issues Count',
     field: 'open_issues_count',
-    comparator: formatedNumberComparator
+    comparator: formatedNumberComparator,
+    cellStyle: { color: '#fff', 'background-color': '#00455f' },
   },
   {
     headerName: 'Watchers',
     field: 'watchers',
-    comparator: formatedNumberComparator
-  }
+    comparator: formatedNumberComparator,
+  },
 ]
 
 export { columnDefs }

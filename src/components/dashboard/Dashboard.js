@@ -14,6 +14,7 @@ import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
+import Pie from './components/charts/pie/Pie'
 
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)
@@ -84,6 +85,11 @@ const dashboardPage = (data) => {
       <Row className="pt-4">
         <Col xs={12} sm={12} md={12} lg={12}>
           <Line data={data} />
+        </Col>
+      </Row>
+      <Row className="pt-4">
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <Pie data={data} />
         </Col>
       </Row>
       <Row className="pt-4">

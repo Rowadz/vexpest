@@ -13,21 +13,29 @@ export default function RepoTable({ data }) {
     defaultColDef: {
       width: 170,
       sortable: true,
-      resizable: true
-    }
+      resizable: true,
+      rowClassRules: {
+        taksim: true,
+      },
+    },
+    rowClassRules: {
+      'dark-blue': ({ rowIndex }) => rowIndex % 2 === 0,
+      'not-dark-blue': ({ rowIndex }) => rowIndex % 2 !== 0,
+    },
   })
   return (
     <div
       className="ag-theme-alpine-dark"
       style={{
         height: '500px',
-        width: '100%'
+        width: '100%',
       }}
     >
       <AgGridReact
         columnDefs={state.columnDefs}
         rowData={state.rowData}
         defaultColDef={state.defaultColDef}
+        rowClassRules={state.rowClassRules}
       ></AgGridReact>
     </div>
   )
@@ -54,6 +62,6 @@ const mapper = (data = []) =>
       forks_count: formatNumber(forks_count),
       open_issues_count: formatNumber(open_issues_count),
       watchers: formatNumber(watchers),
-      ...reset
+      ...reset,
     })
   )

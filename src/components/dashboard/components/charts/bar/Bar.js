@@ -32,6 +32,12 @@ const optionsMerge = (data) => {
     legend: {
       data: languages,
       bottom: 'bottom',
+      type: 'scroll',
+      orient: 'horizontal',
+      bottom: 20,
+      textStyle: {
+        color: '#fff',
+      },
     },
     color: [
       '#3C6E7F',

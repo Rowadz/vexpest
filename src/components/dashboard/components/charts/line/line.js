@@ -16,7 +16,8 @@ const optionsMerge = (data) => {
   const { dataToViz, years } = mapToLine(data)
   return {
     title: {
-      text: 'Stars By Repo',
+      text: 'Repo Creation By year',
+      subtext: 'How man repos this user created each year',
       top: 'top',
       left: 'center',
       color: '#fff',
@@ -33,7 +34,7 @@ const optionsMerge = (data) => {
       show: true,
       trigger: 'axis',
       formatter: ([{ data: count, axisValue: year }]) => {
-        return `Created ${count} Repos in ${year}`
+        return `Created <b>${count}</b> Repos in ${year}`
       },
     },
     yAxis: {
