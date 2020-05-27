@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <section>
-      <div style={{ padding: '10px' }}>
+      <div style={{ marginTop: '10px' }}>
         <Input
           componentClass="textarea"
           rows={3}
@@ -25,7 +25,7 @@ export default function Home() {
           placeholder="Github username"
         />
       </div>
-      <div style={{ padding: '10px' }}>
+      <div style={{ marginTop: '10px' }}>
         <Button appearance="ghost" onClick={taksim}>
           Generate
         </Button>

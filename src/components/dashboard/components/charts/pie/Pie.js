@@ -21,7 +21,7 @@ const optionsMerge = (data) => {
   return {
     title: {
       text: 'Repos Size in MB',
-      subtext: 'Only 15 you can view the full list in the end table',
+      subtext: 'Only 15',
       top: 'top',
       left: 'center',
       color: '#fff',
