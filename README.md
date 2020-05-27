@@ -2,6 +2,8 @@
 
 A small & simple react.js app that generates a dashboard based on your github public data you just need to put your name in the input.
 
+**A [second version](https://github.com/MohammedAl-Rowad/vexpest_V2)**
+
 view it [here](https://mohammedal-rowad.github.io/vexpest/)
 
 how to install it [here](https://github.com/MohammedAl-Rowad/vexpest/tree/code)
