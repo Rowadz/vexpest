@@ -17,7 +17,7 @@ const optionsMerge = (data) => {
   return {
     title: {
       text: 'Repo Creation By year',
-      subtext: 'How man repos this user created each year',
+      subtext: 'How many repos this user created each year',
       top: 'top',
       left: 'center',
       color: '#fff',
