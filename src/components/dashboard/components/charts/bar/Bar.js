@@ -11,6 +11,8 @@ export default function Area({ data }) {
     />
   )
 }
+const checkIfMobile = () =>
+  /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 
 const optionsMerge = (data) => {
   const { languages, values } = languageCounter(data)
@@ -31,6 +33,12 @@ const optionsMerge = (data) => {
         color: '#fff',
       },
     },
+    // to fix the cut off labels on x/y xAxis/yAxis
+    // grid: {
+    // bottom: 0,
+    //   left: 0,
+    //   containLabel: true,
+    // },
     color: [
       '#3C6E7F',
       '#5EB4E6',
@@ -60,7 +68,7 @@ const optionsMerge = (data) => {
         const x = Object.values(object).filter(({ value }) => +value)
         if (x[0]) {
           const [{ marker, name, value }] = x
-          return `${marker} ${name} repos count -> ${value}`
+          return `${marker} ${name}: <b>${value}</b>`
         }
         return ''
       },
@@ -79,6 +87,9 @@ const optionsMerge = (data) => {
       boundaryGap: [0, 0.01],
     },
     yAxis: {
+      axisLabel: {
+        show: !checkIfMobile(),
+      },
       type: 'category',
       data: languages,
       splitLine: {

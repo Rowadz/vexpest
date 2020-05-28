@@ -42,9 +42,17 @@ const mapToArea = (data) => {
     }),
     {}
   )
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
+  }
   const sorted = Object.keys(data)
-    .sort((a, b) => data[a] - data[b])
+    .sort((a, b) => data[b] - data[a])
     .filter((key) => data[key])
+    .slice(0, 10)
+  shuffleArray(sorted)
 
   return {
     xAxis: sorted,

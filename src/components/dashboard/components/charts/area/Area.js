@@ -12,11 +12,17 @@ export default function Area({ data }) {
   )
 }
 
+const scale = (num, inMin, inMax, outMin, outMax) =>
+  ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
+
 const optionsMerge = (data) => {
   const { dataToViz, xAxis } = mapToArea(data)
+
+  const max = Math.max(...dataToViz)
   return {
     title: {
       text: 'Stars By Repo',
+      subtext: 'Top 10 only',
       top: 'top',
       left: 'center',
       color: '#fff',
@@ -27,6 +33,7 @@ const optionsMerge = (data) => {
       data: xAxis,
       axisLabel: {
         rotate: 45,
+        show: false,
       },
       splitLine: {
         show: false,
@@ -35,6 +42,14 @@ const optionsMerge = (data) => {
     tooltip: {
       show: true,
       trigger: 'axis',
+      formatter: (object) => {
+        const x = Object.values(object).filter(({ value }) => +value)
+        if (x[0]) {
+          const [{ marker, name, value }] = x
+          return `${marker} ${name}<br/> ☆stars☆: ${value}`
+        }
+        return ''
+      },
     },
     yAxis: {
       type: 'value',
@@ -46,9 +61,25 @@ const optionsMerge = (data) => {
       {
         color: ['#3C6E7F'],
         data: dataToViz,
-        type: 'line',
+        // type: 'line',
+        symbolSize: (data) => scale(data, 1, max, 5, 50),
+        type: 'scatter',
         smooth: true,
         // areaStyle: {},
+        label: {
+          normal: {
+            show: true,
+            position: 'inside',
+            formatter: ({ dataIndex }) =>
+              xAxis[dataIndex].length > 10 ? '' : xAxis[dataIndex],
+          },
+        },
+        itemStyle: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(25, 100, 150, 0.5)',
+          shadowOffsetY: 5,
+          color: ['#3C6E7F'],
+        },
       },
     ],
   }
