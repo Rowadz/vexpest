@@ -15,7 +15,6 @@ code {
 }
 
 .karya-table-row,
-.karya-table-row .rs-table-cell,
-.wired-rendered {
+.karya-table-row .rs-table-cell {
   background: #0f131a;
 }

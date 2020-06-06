@@ -8,13 +8,13 @@ import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
 import Area from './components/charts/area/Area'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
-import 'wired-dialog'
 import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
-import RepoTable2 from './components/tables/rsuiteTable'
+import { Modal } from 'rsuite'
+const { Header, Title, Body, Footer } = Modal
 
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)
@@ -32,23 +32,29 @@ export default function Dashboard() {
   }
   if (state.err) {
     dialog = (
-      <wired-dialog open={!state.err} elevation={5}>
-        <h1>Oops! :(</h1>
-        <p>
-          <b>
-            looks like we sent too many request, plz come back later after 1
-            hour. ( most likely )
-          </b>
-          {/* aka we sent more than one request in 1 hour */}
-        </p>
-        <p>
-          or something I have no idea about happened and my code does not handle
-          it.
-        </p>
-        <div style={{ textAlign: 'center', padding: '30px 16px 16px' }}>
-          {/* <wired-button id="closeDialog">Close dialog</wired-button> */}
-        </div>
-      </wired-dialog>
+      <Modal backdrop={true} show={state.err}>
+        <Header>
+          <Title>Oops! :(</Title>
+        </Header>
+        <Body>
+          <p>
+            <b>
+              looks like we sent too many request, plz come back later after 1
+              hour. ( most likely )
+            </b>
+            {/* aka we sent more than one request in 1 hour */}
+          </p>
+          <p>
+            or something I have no idea about happened and my code does not
+            handle it.
+          </p>
+        </Body>
+        <Footer>
+          <strong>
+            <p>Try refreshing the page</p>
+          </strong>
+        </Footer>
+      </Modal>
     )
   }
   return (
