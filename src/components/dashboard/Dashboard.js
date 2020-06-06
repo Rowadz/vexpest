@@ -14,6 +14,7 @@ import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
+import RepoTable2 from './components/tables/rsuiteTable'
 
 export default function Dashboard() {
   const query = new URLSearchParams(window.location.search)

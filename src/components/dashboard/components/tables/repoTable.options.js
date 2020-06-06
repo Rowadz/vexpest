@@ -41,12 +41,12 @@ const columnDefs = [
     headerName: 'URL',
     field: 'html_url',
     sortable: false,
-    cellRenderer: ({ value }) => {
-      const urlAsArr = value.split('/')
-      return `<a href="${value}" target="_blank" rel="noopener">${
-        urlAsArr[urlAsArr.length - 1]
-      }</a>`
-    },
+    // cellRenderer: ({ value }) => {
+    //   const urlAsArr = value.split('/')
+    //   return `<a href="${value}" target="_blank" rel="noopener">${
+    //     urlAsArr[urlAsArr.length - 1]
+    //   }</a>`
+    // },
   },
   {
     headerName: 'Is Forked?',

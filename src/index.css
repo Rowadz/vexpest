@@ -13,3 +13,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.karya-table-row,
+.karya-table-row .rs-table-cell,
+.wired-rendered {
+  background: #0f131a;
+}
