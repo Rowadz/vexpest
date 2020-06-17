@@ -5,6 +5,8 @@ import {
   darkTheme,
   lightTxtColor,
   darkTxtColor,
+  mainColor2,
+  mainColor,
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
@@ -47,25 +49,28 @@ const optionsMerge = (data, theme) => {
     //   left: 0,
     //   containLabel: true,
     // },
-    color: [
-      '#3C6E7F',
-      '#5EB4E6',
-      '#294466',
-      '#398CBF',
-      '#1F598C',
-      '#143C8C',
-      '#60B9D2',
-      '#01485B',
-      '#0893B8',
-      '#C8E7EF',
-      '#075473',
-      '#092B40',
-      '#032340',
-      '#8BFAFF',
-      '#3E84E6',
-      '#27528F',
-      '#2A599C',
-    ],
+    color:
+      theme === darkTheme
+        ? [
+            mainColor,
+            '#5EB4E6',
+            '#294466',
+            '#398CBF',
+            '#1F598C',
+            '#143C8C',
+            '#60B9D2',
+            '#01485B',
+            '#0893B8',
+            '#C8E7EF',
+            '#075473',
+            '#092B40',
+            '#032340',
+            '#8BFAFF',
+            '#3E84E6',
+            '#27528F',
+            '#2A599C',
+          ]
+        : mainColor2,
     tooltip: {
       axisPointer: {
         type: 'shadow',

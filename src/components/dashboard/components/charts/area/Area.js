@@ -5,6 +5,8 @@ import {
   darkTheme,
   lightTxtColor,
   darkTxtColor,
+  mainColor2,
+  mainColor,
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
@@ -70,7 +72,7 @@ const optionsMerge = (data, theme) => {
     },
     series: [
       {
-        color: ['#3C6E7F'],
+        color: theme === darkTheme ? mainColor : mainColor2,
         data: dataToViz,
         // type: 'line',
         symbolSize: (data) => scale(data, 1, max, 5, 50),
@@ -89,10 +91,10 @@ const optionsMerge = (data, theme) => {
           },
         },
         itemStyle: {
-          shadowBlur: 10,
-          shadowColor: 'rgba(25, 100, 150, 0.5)',
-          shadowOffsetY: 5,
-          color: ['#3C6E7F'],
+          // shadowBlur: 10,
+          // shadowColor: 'rgba(25, 100, 150, 0.5)',
+          // shadowOffsetY: 5,
+          color: theme === darkTheme ? mainColor : mainColor2,
         },
       },
     ],

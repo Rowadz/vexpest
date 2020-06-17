@@ -36,7 +36,7 @@ const App = () => {
             style={{
               backgroundColor:
                 state.theme === darkTheme ? darkBgColor : lightBgColor,
-              boxShadow: '-1px 6px 10px #000',
+              boxShadow: '-1px 6px 10px black',
             }}
           >
             <Header style={{ padding: '18px 20px', display: 'inline-block' }}>

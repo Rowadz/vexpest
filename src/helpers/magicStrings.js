@@ -4,3 +4,6 @@ export const lightTxtColor = '#575757'
 export const lightBgColor = '#fff'
 export const darkTxtColor = '#e9ebf0'
 export const darkBgColor = '#0f131a'
+export const mainColor = '#3C6E7F'
+export const mainColor2 = '#0D0D0D'
+export let globalTheme = darkTheme

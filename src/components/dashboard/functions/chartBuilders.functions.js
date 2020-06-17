@@ -1,5 +1,11 @@
 import { graphPlaceHolder } from '../components/charts/starsGraph/starsGraph.options'
 import rn from 'random-number'
+import {
+  mainColor2,
+  mainColor,
+  globalTheme,
+  darkTheme,
+} from '../../../helpers/magicStrings'
 const mapPieData = (data = [], y = 'stargazers_count', mapper) =>
   data
     .map((obj) => ({
@@ -101,7 +107,9 @@ const graphNodesLinks = (data) => {
     {
       id: '0',
       name: 'You',
-      itemStyle: { normal: { color: '#3C6E7F' } },
+      itemStyle: {
+        normal: { color: globalTheme === darkTheme ? mainColor : mainColor2 },
+      },
       symbolSize: 20,
       x: -266.82776,
       y: 299.6904,

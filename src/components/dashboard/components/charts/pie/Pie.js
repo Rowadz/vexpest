@@ -1,7 +1,12 @@
 import React from 'react'
 import { mapPieData } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
-import { darkTheme, lightTxtColor } from '../../../../../helpers/magicStrings'
+import {
+  darkTheme,
+  lightTxtColor,
+  mainColor2,
+  mainColor,
+} from '../../../../../helpers/magicStrings'
 
 export default function Pie({ data, theme }) {
   return (
@@ -35,7 +40,7 @@ const optionsMerge = (data, theme) => {
       formatter: '{b} <br/>{c} MB',
     },
     backgroundColor: 'transparent',
-    colors: ['#3C6E7F'],
+    colors: [theme === darkTheme ? mainColor : mainColor2],
     legend: {
       type: 'scroll',
       show: checkIfMobile(),
@@ -51,7 +56,7 @@ const optionsMerge = (data, theme) => {
     },
     series: [
       {
-        color: ['#3C6E7F'],
+        color: theme === darkTheme ? mainColor : mainColor2,
         type: 'pie',
         radius: checkIfMobile() ? '100%' : '55%',
         center: ['50%', '50%'],
@@ -70,9 +75,9 @@ const optionsMerge = (data, theme) => {
           length2: 20,
         },
         itemStyle: {
-          color: '#3C6E7F',
-          shadowBlur: 200,
-          shadowColor: 'rgba(0, 0, 0, 0.5)',
+          color: theme === darkTheme ? mainColor : mainColor2,
+          // shadowBlur: 200,
+          // shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
 
         animationType: 'scale',

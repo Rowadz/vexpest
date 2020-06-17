@@ -88,7 +88,7 @@ const Dashboard = ({ theme, updateTheme }) => {
         style={{
           backgroundColor: theme === darkTheme ? darkBgColor : lightBgColor,
           color: theme === darkTheme ? darkTxtColor : lightTxtColor,
-          boxShadow: '-1px 6px 10px #000',
+          boxShadow: '-1px 6px 10px black',
         }}
         // appearance="ghost"
       />

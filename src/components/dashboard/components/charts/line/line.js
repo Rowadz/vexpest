@@ -4,6 +4,8 @@ import {
   darkTheme,
   lightTxtColor,
   darkTxtColor,
+  mainColor2,
+  mainColor,
 } from '../../../../../helpers/magicStrings'
 import ReactEcharts from 'echarts-for-react'
 
@@ -61,7 +63,7 @@ const optionsMerge = (data, theme) => {
       {
         data: dataToViz,
         type: 'line',
-        color: ['#3C6E7F'],
+        color: [theme === darkTheme ? mainColor : mainColor2],
         smooth: true,
       },
     ],
