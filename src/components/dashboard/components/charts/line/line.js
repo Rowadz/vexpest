@@ -1,26 +1,40 @@
 import React from 'react'
 import { mapToLine } from '../../../functions/chartBuilders.functions'
+import {
+  lightTheme,
+  darkTheme,
+  lightTxtColor,
+  lightBgColor,
+  darkTxtColor,
+  darkBgColor,
+} from '../../../../../helpers/magicStrings'
 import ReactEcharts from 'echarts-for-react'
 
-export default function Line({ data }) {
+export default function Line({ data, theme }) {
   return (
     <ReactEcharts
       style={{ height: '500px', width: '100%' }}
-      theme={'dark'}
-      option={optionsMerge(data)}
+      theme={theme === darkTheme ? 'dark' : 'light'}
+      option={optionsMerge(data, theme)}
     />
   )
 }
 
-const optionsMerge = (data) => {
+const getColorTxt = (theme) =>
+  theme === darkTheme ? darkTxtColor : lightTxtColor
+
+const optionsMerge = (data, theme) => {
   const { dataToViz, years } = mapToLine(data)
+
   return {
     title: {
       text: 'Repo Creation By year',
       subtext: 'How many repos this user created each year',
       top: 'top',
       left: 'center',
-      color: '#fff',
+      textStyle: {
+        color: getColorTxt(theme),
+      },
     },
     backgroundColor: 'transparent',
     xAxis: {
@@ -28,6 +42,9 @@ const optionsMerge = (data) => {
       data: years,
       splitLine: {
         show: false,
+      },
+      axisLabel: {
+        color: getColorTxt(theme),
       },
     },
     tooltip: {

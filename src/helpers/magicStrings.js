@@ -1,4 +1,6 @@
-export const defaultTheme = 'night'
+export const darkTheme = 'night'
 export const lightTheme = 'sun'
 export const lightTxtColor = '#575757'
 export const lightBgColor = '#fff'
+export const darkTxtColor = '#e9ebf0'
+export const darkBgColor = '#0f131a'

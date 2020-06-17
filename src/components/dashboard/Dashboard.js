@@ -14,7 +14,7 @@ import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
 import { Modal, Icon, IconButton } from 'rsuite'
-import { lightTheme, defaultTheme } from '../../helpers/magicStrings'
+import { lightTheme, darkTheme } from '../../helpers/magicStrings'
 const { Header, Title, Body, Footer } = Modal
 
 const Dashboard = ({ theme, updateTheme }) => {
@@ -68,7 +68,7 @@ const Dashboard = ({ theme, updateTheme }) => {
     if (!theme || theme === 'night') {
       updateTheme({ theme: lightTheme })
     } else if (theme === 'sun') {
-      updateTheme({ theme: defaultTheme })
+      updateTheme({ theme: darkTheme })
     }
   }
 
@@ -83,7 +83,7 @@ const Dashboard = ({ theme, updateTheme }) => {
 
 const dashboardPage = (data, theme) => {
   const kpis = [
-    KpiForks,
+    KpiRepos,
     KpiForks,
     KpiStars,
     KpiForksTotal,
