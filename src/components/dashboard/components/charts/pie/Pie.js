@@ -1,20 +1,28 @@
 import React from 'react'
 import { mapPieData } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import {
+  darkTheme,
+  lightTxtColor,
+  darkTxtColor,
+} from '../../../../../helpers/magicStrings'
 
-export default function Pie({ data }) {
+export default function Pie({ data, theme }) {
   return (
     <ReactEcharts
       style={{ height: '700px', width: '100%' }}
-      theme={'dark'}
-      option={optionsMerge(data)}
+      theme={theme === darkTheme ? 'dark' : 'light'}
+      option={optionsMerge(data, theme)}
     />
   )
 }
 const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 
-const optionsMerge = (data) => {
+const getColorTxt = (theme, opacity) =>
+  theme === darkTheme ? `rgba(255, 255, 255, ${opacity})` : lightTxtColor
+
+const optionsMerge = (data, theme) => {
   const toViz = mapPieData(data, 'size', (d) => d / 1000)
     .slice(0, 15)
     .sort((a, b) => b.value - a.value)
@@ -49,17 +57,17 @@ const optionsMerge = (data) => {
       {
         color: ['#3C6E7F'],
         type: 'pie',
-        radius: checkIfMobile() ? '100%': '55%',
+        radius: checkIfMobile() ? '100%' : '55%',
         center: ['50%', '50%'],
         data: toViz,
         roseType: 'radius',
         label: {
           show: !checkIfMobile(),
-          color: 'rgba(255, 255, 255, 1)',
+          color: getColorTxt(theme, 1),
         },
         labelLine: {
           lineStyle: {
-            color: 'rgba(255, 255, 255, 0.3)',
+            color: getColorTxt(theme, 0.3),
           },
           smooth: 0.2,
           length: 10,

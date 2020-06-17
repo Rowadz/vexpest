@@ -1,12 +1,9 @@
 import React from 'react'
 import { mapToLine } from '../../../functions/chartBuilders.functions'
 import {
-  lightTheme,
   darkTheme,
   lightTxtColor,
-  lightBgColor,
   darkTxtColor,
-  darkBgColor,
 } from '../../../../../helpers/magicStrings'
 import ReactEcharts from 'echarts-for-react'
 
