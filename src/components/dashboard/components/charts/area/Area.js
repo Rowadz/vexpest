@@ -1,13 +1,18 @@
 import React from 'react'
 import { mapToArea } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import {
+  darkTheme,
+  lightTxtColor,
+  darkTxtColor,
+} from '../../../../../helpers/magicStrings'
 
-export default function Area({ data }) {
+export default function Area({ data, theme }) {
   return (
     <ReactEcharts
       style={{ height: '700px', width: '100%' }}
-      theme={'dark'}
-      option={optionsMerge(data)}
+      theme={theme === darkTheme ? 'dark' : 'light'}
+      option={optionsMerge(data, theme)}
     />
   )
 }
@@ -18,7 +23,10 @@ const checkIfMobile = () =>
 const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 
-const optionsMerge = (data) => {
+const getColorTxt = (theme) =>
+  theme === darkTheme ? darkTxtColor : lightTxtColor
+
+const optionsMerge = (data, theme) => {
   const { dataToViz, xAxis } = mapToArea(data)
 
   const max = Math.max(...dataToViz)
@@ -71,6 +79,7 @@ const optionsMerge = (data) => {
         // areaStyle: {},
         label: {
           normal: {
+            color: getColorTxt(theme),
             show: true,
             position: 'inside',
             formatter: ({ dataIndex }) =>
