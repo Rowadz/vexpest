@@ -1,20 +1,28 @@
 import React from 'react'
 import { languageCounter } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import {
+  darkTheme,
+  lightTxtColor,
+  darkTxtColor,
+} from '../../../../../helpers/magicStrings'
 
-export default function Area({ data }) {
+export default function Area({ data, theme }) {
   return (
     <ReactEcharts
       style={{ height: '500px', width: '100%' }}
-      theme={'dark'}
-      option={optionsMerge(data)}
+      theme={theme === darkTheme ? 'dark' : 'light'}
+      option={optionsMerge(data, theme)}
     />
   )
 }
 const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 
-const optionsMerge = (data) => {
+const getColorTxt = (theme) =>
+  theme === darkTheme ? darkTxtColor : lightTxtColor
+
+const optionsMerge = (data, theme) => {
   const { languages, values } = languageCounter(data)
   return {
     title: {
@@ -30,7 +38,7 @@ const optionsMerge = (data) => {
       orient: 'horizontal',
       bottom: 20,
       textStyle: {
-        color: '#fff',
+        color: getColorTxt(theme),
       },
     },
     // to fix the cut off labels on x/y xAxis/yAxis
