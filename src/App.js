@@ -11,7 +11,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Container, Row, Col } from 'react-grid-system'
 import 'rsuite/dist/styles/rsuite-dark.css'
-import { Navbar, Nav } from 'rsuite'
+import { Navbar, Nav, Icon } from 'rsuite'
 import {
   darkTheme,
   lightBgColor,
@@ -62,12 +62,20 @@ const App = () => {
           >
             <Header style={{ padding: '18px 20px', display: 'inline-block' }}>
               <NavLink to="/">
-                <span role="img" aria-label="random emoji I found">
-                  🚀
+                <span
+                  role="img"
+                  aria-label="random emoji I found"
+                  style={{ padding: '5px' }}
+                >
+                  <Icon icon="rocket" />
                 </span>
                 VEXPEST
-                <span role="img" aria-label="random emoji I found">
-                  🚀
+                <span
+                  role="img"
+                  aria-label="random emoji I found"
+                  style={{ padding: '5px' }}
+                >
+                  <Icon icon="rocket" />
                 </span>
               </NavLink>
             </Header>
@@ -84,7 +92,7 @@ const App = () => {
               <Route path="/">
                 <Row>
                   <Col sm={12}>
-                    <Home />
+                    <Home theme={state.theme} />
                   </Col>
                 </Row>
               </Route>
