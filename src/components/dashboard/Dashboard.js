@@ -8,18 +8,24 @@ import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
 import Area from './components/charts/area/Area'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
-import { Base64 } from 'js-base64'
+// import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
-import { Modal } from 'rsuite'
+import { Modal, Icon, IconButton } from 'rsuite'
+import { lightTheme, defaultTheme } from '../../helpers/magicStrings'
 const { Header, Title, Body, Footer } = Modal
 
-export default function Dashboard() {
+const Dashboard = ({ theme, updateTheme }) => {
   const query = new URLSearchParams(window.location.search)
   const name = query.get('name')
-  const [state, setSate] = useState({ data: null, err: false, name: null })
+  const [state, setSate] = useState({
+    data: null,
+    err: false,
+    name: null,
+    theme,
+  })
   useEffect(() => {
     getData(setSate.bind(Dashboard), name)
   }, [])
@@ -28,7 +34,7 @@ export default function Dashboard() {
   if (!state.data) {
     page = <Spinner />
   } else {
-    page = dashboardPage(state.data)
+    page = dashboardPage(state.data, theme)
   }
   if (state.err) {
     dialog = (
@@ -57,62 +63,50 @@ export default function Dashboard() {
       </Modal>
     )
   }
+
+  const changeTheme = async () => {
+    if (!theme || theme === 'night') {
+      updateTheme({ theme: lightTheme })
+    } else if (theme === 'sun') {
+      updateTheme({ theme: defaultTheme })
+    }
+  }
+
   return (
     <section>
+      <IconButton icon={<Icon icon="sun-o" />} onClick={changeTheme} circle />
       {page}
       {dialog}
     </section>
   )
 }
 
-const dashboardPage = (data) => {
+const dashboardPage = (data, theme) => {
+  const kpis = [
+    KpiForks,
+    KpiForks,
+    KpiStars,
+    KpiForksTotal,
+    KpiArchived,
+    KpiNotArchived,
+  ].map((el, i) => (
+    <Col xs={12} sm={12} md={6} lg={6} key={i}>
+      {React.createElement(el, { data, theme })}
+    </Col>
+  ))
+
+  const charts = [Line, Pie, Area, Bar, StarsGraph].map((el, i) => (
+    <Row className="pt-4" key={i}>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        {React.createElement(el, { data, theme })}
+      </Col>
+    </Row>
+  ))
+
   return (
     <section>
-      <Row>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiRepos data={data} />
-        </Col>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiForks data={data} />
-        </Col>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiStars data={data} />
-        </Col>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiForksTotal data={data} />
-        </Col>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiArchived data={data} />
-        </Col>
-        <Col xs={12} sm={12} md={6} lg={6}>
-          <KpiNotArchived data={data} />
-        </Col>
-      </Row>
-      <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <Line data={data} />
-        </Col>
-      </Row>
-      <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <Pie data={data} />
-        </Col>
-      </Row>
-      <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <Area data={data} />
-        </Col>
-      </Row>
-      <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <Bar data={data} />
-        </Col>
-      </Row>
-      <Row className="pt-4">
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <StarsGraph data={data} />
-        </Col>
-      </Row>
+      <Row>{kpis}</Row>
+      {charts}
     </section>
   )
 }
@@ -125,6 +119,10 @@ const getData = async (setSate, name) => {
   // )
 
   try {
+    if (localStorage.getItem('data')) {
+      setSate({ data: JSON.parse(localStorage.getItem('data')), err: false })
+      return
+    }
     let res = []
     for (const i of [...Array(10).keys()]) {
       const data = await (
@@ -138,9 +136,12 @@ const getData = async (setSate, name) => {
       if (data.length === 0) break
       res.push(...data)
     }
+    localStorage.setItem('data', JSON.stringify(res))
     setSate({ data: res, err: false })
   } catch (error) {
     console.error(error)
     setSate({ err: true })
   }
 }
+
+export default Dashboard

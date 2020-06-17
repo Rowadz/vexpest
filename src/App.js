@@ -1,5 +1,5 @@
-import React from 'react'
-import './App.css'
+import React, { useState } from 'react'
+import './App.scss'
 import Home from './components/home/Home'
 import {
   BrowserRouter as Router,
@@ -9,12 +9,15 @@ import {
 } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
 import { Container, Row, Col } from 'react-grid-system'
-import 'rsuite/dist/styles/rsuite-dark.css'
+import 'rsuite/dist/styles/rsuite-default.css'
 import { Navbar, Nav } from 'rsuite'
+import { defaultTheme } from './helpers/magicStrings'
 const { Body } = Navbar
 const { Item } = Nav
 
-function App() {
+const App = () => {
+  const [state, setState] = useState({ theme: defaultTheme })
+  console.log({ state })
   return (
     <main>
       <Router>
@@ -40,7 +43,7 @@ function App() {
             <Route path="/dashboard">
               <Row>
                 <Col sm={12}>
-                  <Dashboard />
+                  <Dashboard theme={state.theme} updateTheme={setState} />
                 </Col>
               </Row>
             </Route>
