@@ -12,43 +12,44 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Container, Row, Col } from 'react-grid-system'
 import 'rsuite/dist/styles/rsuite-dark.css'
 import { Navbar, Nav } from 'rsuite'
-import { darkTheme, lightTheme } from './helpers/magicStrings'
-const { Body } = Navbar
+import { darkTheme, lightBgColor, darkBgColor } from './helpers/magicStrings'
+const { Body, Header } = Navbar
 const { Item } = Nav
 
 const GlobalStyle = createGlobalStyle`
-  body, .rs-panel-heading, .rs-panel {
+  body, .rs-panel-heading, .rs-panel, .rs-navbar.rs-navbar-default, .rs-navbar.rs-navbar-default .rs-navbar-header a {
     background-color: ${({ theme }) =>
       theme.mode === darkTheme ? '#0f131a' : '#fff'};
     color: ${({ theme }) => (theme.mode === darkTheme ? '#e9ebf0' : '#575757')};
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease-in-out;
   }
 `
 
 const App = () => {
   const [state, setState] = useState({ theme: darkTheme })
-  console.log(state)
   return (
     <ThemeProvider theme={{ mode: state.theme }}>
       <GlobalStyle />
       <main>
-        <Router style={{ background: 'red' }}>
-          <Navbar>
-            <Body>
-              <Nav>
-                <NavLink to="/about">
-                  <Item>
-                    <span role="img" aria-label="random emoji I found">
-                      🚀
-                    </span>
-                    VEXPEST
-                    <span role="img" aria-label="random emoji I found">
-                      🚀
-                    </span>
-                  </Item>
-                </NavLink>
-              </Nav>
-            </Body>
+        <Router>
+          <Navbar
+            style={{
+              backgroundColor:
+                state.theme === darkTheme ? darkBgColor : lightBgColor,
+              boxShadow: '-1px 6px 10px #000',
+            }}
+          >
+            <Header style={{ padding: '18px 20px', display: 'inline-block' }}>
+              <NavLink to="/">
+                <span role="img" aria-label="random emoji I found">
+                  🚀
+                </span>
+                VEXPEST
+                <span role="img" aria-label="random emoji I found">
+                  🚀
+                </span>
+              </NavLink>
+            </Header>
           </Navbar>
           <Container>
             <Switch>

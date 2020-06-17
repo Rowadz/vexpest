@@ -1,25 +1,33 @@
 import React from 'react'
 import { graphNodesLinks } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import {
+  darkTheme,
+  lightTxtColor,
+  darkTxtColor,
+} from '../../../../../helpers/magicStrings'
 
-export default function StarsGraph({ data }) {
+export default function StarsGraph({ data, theme }) {
   return (
     <ReactEcharts
       style={{ height: '700px', width: '100%' }}
-      theme={'dark'}
-      option={optionsMerge(data)}
+      theme={theme === darkTheme ? 'dark' : 'light'}
+      option={optionsMerge(data, theme)}
     />
   )
 }
 
-const optionsMerge = (data) => {
+const getColorTxt = (theme) =>
+  theme === darkTheme ? darkTxtColor : lightTxtColor
+
+const optionsMerge = (data, theme) => {
   const { links, nodes, categories } = graphNodesLinks(data)
   return {
     backgroundColor: 'transparent',
     height: '700px',
     title: {
       text: 'Info Graph',
-        subtext: 'you can scroll in here!',
+      subtext: 'you can scroll in here!',
       top: 'top',
       left: 'center',
       color: '#fff',
@@ -47,7 +55,7 @@ const optionsMerge = (data) => {
         selectedMode: 'single',
         data: categories,
         show: true,
-        color: '#fff',
+        color: getColorTxt(theme),
       },
     ],
     animationDuration: 1500,
@@ -64,7 +72,7 @@ const optionsMerge = (data) => {
         roam: true,
         focusNodeAdjacency: true,
         itemStyle: {
-          borderColor: '#fff',
+          borderColor: getColorTxt(theme),
           borderWidth: 1,
           shadowBlur: 10,
           shadowColor: 'rgba(0, 0, 0, 0.3)',
@@ -75,6 +83,7 @@ const optionsMerge = (data) => {
         },
         lineStyle: {
           // color: 'source',
+          color: getColorTxt(theme),
           curveness: 0.3,
         },
         emphasis: {

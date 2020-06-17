@@ -14,7 +14,14 @@ import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
 import { Modal, Icon, IconButton } from 'rsuite'
-import { lightTheme, darkTheme } from '../../helpers/magicStrings'
+import {
+  lightTheme,
+  darkTheme,
+  lightTxtColor,
+  darkTxtColor,
+  lightBgColor,
+  darkBgColor,
+} from '../../helpers/magicStrings'
 const { Header, Title, Body, Footer } = Modal
 
 const Dashboard = ({ theme, updateTheme }) => {
@@ -73,8 +80,18 @@ const Dashboard = ({ theme, updateTheme }) => {
   }
 
   return (
-    <section>
-      <IconButton icon={<Icon icon="sun-o" />} onClick={changeTheme} circle />
+    <section style={{ paddingTop: '1rem' }}>
+      <IconButton
+        icon={<Icon icon={theme === darkTheme ? 'moon-o' : 'sun-o'} />}
+        onClick={changeTheme}
+        circle
+        style={{
+          backgroundColor: theme === darkTheme ? darkBgColor : lightBgColor,
+          color: theme === darkTheme ? darkTxtColor : lightTxtColor,
+          boxShadow: '-1px 6px 10px #000',
+        }}
+        // appearance="ghost"
+      />
       {page}
       {dialog}
     </section>
@@ -112,7 +129,7 @@ const dashboardPage = (data, theme) => {
 }
 
 const getData = async (setSate, name) => {
-  let headers = new Headers()
+  // let headers = new Headers()
   // headers.append(
   //   'Authorization',
   //   'Basic' + Base64.encode(`username:password`)

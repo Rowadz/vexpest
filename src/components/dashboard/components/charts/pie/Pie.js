@@ -1,11 +1,7 @@
 import React from 'react'
 import { mapPieData } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
-import {
-  darkTheme,
-  lightTxtColor,
-  darkTxtColor,
-} from '../../../../../helpers/magicStrings'
+import { darkTheme, lightTxtColor } from '../../../../../helpers/magicStrings'
 
 export default function Pie({ data, theme }) {
   return (
