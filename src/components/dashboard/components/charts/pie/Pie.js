@@ -48,7 +48,7 @@ const optionsMerge = (data, theme) => {
       top: checkIfMobile() ? null : 20,
       bottom: 20,
       textStyle: {
-        color: '#fff',
+        color: getColorTxt(theme, 1),
       },
       data: toViz,
       // selected: toViz,
