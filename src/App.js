@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
 import { Container, Row, Col } from 'react-grid-system'
-import 'rsuite/dist/styles/rsuite-default.css'
+import 'rsuite/dist/styles/rsuite-dark.css'
 import { Navbar, Nav } from 'rsuite'
 import { defaultTheme } from './helpers/magicStrings'
 const { Body } = Navbar
@@ -17,10 +17,9 @@ const { Item } = Nav
 
 const App = () => {
   const [state, setState] = useState({ theme: defaultTheme })
-  console.log({ state })
   return (
     <main>
-      <Router>
+      <Router style={{ background: 'red' }}>
         <Navbar>
           <Body>
             <Nav>

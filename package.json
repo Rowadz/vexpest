@@ -24,6 +24,8 @@
     "react-scripts": "3.4.1",
     "rsuite": "^4.7.0",
     "rsuite-table": "^3.13.1",
+    "styled-components": "^5.1.1",
+    "styled-theming": "^2.2.0",
     "wired-elements": "^2.0.5"
   },
   "scripts": {
