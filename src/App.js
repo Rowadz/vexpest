@@ -19,7 +19,7 @@ const { Item } = Nav
 const GlobalStyle = createGlobalStyle`
   body, .rs-panel-heading, .rs-panel, .rs-navbar.rs-navbar-default, .rs-navbar.rs-navbar-default .rs-navbar-header a {
     background-color: ${({ theme }) =>
-      theme.mode === darkTheme ? '#0f131a' : '#fff'};
+      theme.mode === darkTheme || !theme.mode ? '#0f131a' : '#fff'};
     color: ${({ theme }) => (theme.mode === darkTheme ? '#e9ebf0' : '#575757')};
     transition: background-color 0.3s ease-in-out;
   }

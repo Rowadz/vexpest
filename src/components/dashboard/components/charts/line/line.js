@@ -11,23 +11,29 @@ import { InView } from 'react-intersection-observer'
 import ReactEcharts from 'echarts-for-react'
 
 export default function Line({ data, theme }) {
-  return (
-    <InView>
-      {({ inView, ref, entry }) => (
-        <div ref={ref} style={{ height: '500px', width: '100%' }}>
-          {inView ? (
-            <ReactEcharts
-              style={{ height: '500px', width: '100%' }}
-              theme={theme === darkTheme ? 'dark' : 'light'}
-              option={optionsMerge(data, theme)}
-            />
-          ) : (
-            ''
-          )}
-        </div>
-      )}
-    </InView>
-  )
+  return (() => {
+    let oneTime = false
+    const getChart = () => (
+      <ReactEcharts
+        style={{ height: '500px', width: '100%' }}
+        theme={theme === darkTheme ? 'dark' : 'light'}
+        option={optionsMerge(data, theme)}
+      />
+    )
+    const updateOneTime = () => {
+      oneTime = true
+      return getChart()
+    }
+    return (
+      <InView>
+        {({ inView, ref, entry }) => (
+          <div ref={ref} style={{ height: '500px', width: '100%' }}>
+            {inView && !oneTime ? getChart() : updateOneTime()}
+          </div>
+        )}
+      </InView>
+    )
+  })()
 }
 
 const getColorTxt = (theme) =>

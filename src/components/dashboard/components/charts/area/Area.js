@@ -1,6 +1,7 @@
 import React from 'react'
 import { mapToArea } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import { InView } from 'react-intersection-observer'
 import {
   darkTheme,
   lightTxtColor,
@@ -10,13 +11,29 @@ import {
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
-  return (
-    <ReactEcharts
-      style={{ height: '700px', width: '100%' }}
-      theme={theme === darkTheme ? 'dark' : 'light'}
-      option={optionsMerge(data, theme)}
-    />
-  )
+  return (() => {
+    let oneTime = false
+    const getChart = () => (
+      <ReactEcharts
+        style={{ height: '700px', width: '100%' }}
+        theme={theme === darkTheme ? 'dark' : 'light'}
+        option={optionsMerge(data, theme)}
+      />
+    )
+    const updateOneTime = () => {
+      oneTime = true
+      return getChart()
+    }
+    return (
+      <InView>
+        {({ inView, ref, entry }) => (
+          <div ref={ref} style={{ height: '700px', width: '100%' }}>
+            {inView && !oneTime ? getChart() : updateOneTime()}
+          </div>
+        )}
+      </InView>
+    )
+  })()
 }
 
 const checkIfMobile = () =>
