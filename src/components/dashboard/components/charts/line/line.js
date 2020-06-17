@@ -6,6 +6,8 @@ import {
   darkTxtColor,
   mainColor2,
   mainColor,
+  mainColor3,
+  lightTheme,
 } from '../../../../../helpers/magicStrings'
 import { InView } from 'react-intersection-observer'
 import ReactEcharts from 'echarts-for-react'
@@ -36,9 +38,6 @@ export default function Line({ data, theme }) {
   })()
 }
 
-const getColorTxt = (theme) =>
-  theme === darkTheme ? darkTxtColor : lightTxtColor
-
 const optionsMerge = (data, theme) => {
   const { dataToViz, years } = mapToLine(data)
 
@@ -48,9 +47,6 @@ const optionsMerge = (data, theme) => {
       subtext: 'How many repos this user created each year',
       top: 'top',
       left: 'center',
-      textStyle: {
-        color: getColorTxt(theme),
-      },
     },
     backgroundColor: 'transparent',
     xAxis: {
@@ -58,9 +54,6 @@ const optionsMerge = (data, theme) => {
       data: years,
       splitLine: {
         show: false,
-      },
-      axisLabel: {
-        color: getColorTxt(theme),
       },
     },
     tooltip: {
@@ -80,7 +73,13 @@ const optionsMerge = (data, theme) => {
       {
         data: dataToViz,
         type: 'line',
-        color: [theme === darkTheme ? mainColor : mainColor2],
+        color: [
+          theme === darkTheme
+            ? mainColor
+            : theme === lightTheme
+            ? mainColor2
+            : mainColor3,
+        ],
         smooth: true,
       },
     ],

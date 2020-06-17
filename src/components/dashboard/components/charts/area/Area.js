@@ -7,10 +7,13 @@ import {
   lightTxtColor,
   darkTxtColor,
   mainColor2,
+  mainColor3,
   mainColor,
+  lightTheme,
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
+  console.log(theme)
   return (() => {
     let oneTime = false
     const getChart = () => (
@@ -89,7 +92,12 @@ const optionsMerge = (data, theme) => {
     },
     series: [
       {
-        color: theme === darkTheme ? mainColor : mainColor2,
+        color:
+          theme === darkTheme
+            ? mainColor
+            : theme === lightTheme
+            ? mainColor2
+            : mainColor3,
         data: dataToViz,
         // type: 'line',
         symbolSize: (data) => scale(data, 1, max, 5, 50),
@@ -111,7 +119,12 @@ const optionsMerge = (data, theme) => {
           // shadowBlur: 10,
           // shadowColor: 'rgba(25, 100, 150, 0.5)',
           // shadowOffsetY: 5,
-          color: theme === darkTheme ? mainColor : mainColor2,
+          color:
+            theme === darkTheme
+              ? mainColor
+              : theme === lightTheme
+              ? mainColor2
+              : mainColor3,
         },
       },
     ],

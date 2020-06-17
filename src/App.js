@@ -12,15 +12,32 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Container, Row, Col } from 'react-grid-system'
 import 'rsuite/dist/styles/rsuite-dark.css'
 import { Navbar, Nav } from 'rsuite'
-import { darkTheme, lightBgColor, darkBgColor } from './helpers/magicStrings'
+import {
+  darkTheme,
+  lightBgColor,
+  darkBgColor,
+  contrastBgColor,
+  lightTheme,
+  mainColor3,
+  contrastTheme,
+} from './helpers/magicStrings'
 const { Body, Header } = Navbar
 const { Item } = Nav
 
 const GlobalStyle = createGlobalStyle`
   body, .rs-panel-heading, .rs-panel, .rs-navbar.rs-navbar-default, .rs-navbar.rs-navbar-default .rs-navbar-header a {
-    background-color: ${({ theme }) =>
-      theme.mode === darkTheme || !theme.mode ? '#0f131a' : '#fff'};
-    color: ${({ theme }) => (theme.mode === darkTheme ? '#e9ebf0' : '#575757')};
+    background-color: ${({ theme: { mode } }) =>
+      mode === darkTheme
+        ? '#0f131a'
+        : mode === lightTheme
+        ? '#fff'
+        : contrastBgColor};
+    color: ${({ theme: { mode } }) =>
+      mode === darkTheme
+        ? '#e9ebf0'
+        : mode === lightTheme
+        ? '#575757'
+        : mainColor3};
     /*transition: background-color 0.3s ease-in-out;*/
   }
 `
@@ -35,7 +52,11 @@ const App = () => {
           <Navbar
             style={{
               backgroundColor:
-                state.theme === darkTheme ? darkBgColor : lightBgColor,
+                state.theme === darkTheme
+                  ? darkBgColor
+                  : state.theme === lightTheme
+                  ? lightBgColor
+                  : contrastBgColor,
               boxShadow: '-1px 6px 10px black',
             }}
           >

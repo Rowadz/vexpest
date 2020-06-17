@@ -1,9 +1,12 @@
 export const darkTheme = 'night'
 export const lightTheme = 'sun'
+export const contrastTheme = 'contrast'
 export const lightTxtColor = '#575757'
 export const lightBgColor = '#fff'
+export const contrastBgColor = '#F1F1F2'
 export const darkTxtColor = '#e9ebf0'
 export const darkBgColor = '#0f131a'
 export const mainColor = '#3C6E7F'
 export const mainColor2 = '#0D0D0D'
+export const mainColor3 = '#BF4240'
 export let globalTheme = darkTheme

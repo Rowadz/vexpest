@@ -8,6 +8,8 @@ import {
   darkTxtColor,
   mainColor2,
   mainColor,
+  lightTheme,
+  mainColor3,
 } from '../../../../../helpers/magicStrings'
 
 export default function StarsGraph({ data, theme }) {
@@ -85,7 +87,12 @@ const optionsMerge = (data, theme) => {
         type: 'graph',
         layout: 'none',
         data: nodes,
-        color: theme === darkTheme ? mainColor : mainColor2,
+        color:
+          theme === darkTheme
+            ? mainColor
+            : theme === lightTheme
+            ? mainColor2
+            : mainColor3,
         links: links,
         categories: categories,
         roam: true,

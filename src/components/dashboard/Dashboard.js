@@ -13,7 +13,7 @@ import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
 import Bar from './components/charts/bar/Bar'
 import Pie from './components/charts/pie/Pie'
-import { Modal, Icon, IconButton } from 'rsuite'
+import { Modal, Icon, IconButton, Dropdown } from 'rsuite'
 import {
   lightTheme,
   darkTheme,
@@ -21,8 +21,11 @@ import {
   darkTxtColor,
   lightBgColor,
   darkBgColor,
+  contrastBgColor,
+  contrastTheme,
 } from '../../helpers/magicStrings'
 const { Header, Title, Body, Footer } = Modal
+const { Item } = Dropdown
 
 const Dashboard = ({ theme, updateTheme }) => {
   const query = new URLSearchParams(window.location.search)
@@ -71,27 +74,54 @@ const Dashboard = ({ theme, updateTheme }) => {
     )
   }
 
-  const changeTheme = async () => {
-    if (!theme || theme === 'night') {
-      updateTheme({ theme: lightTheme })
-    } else if (theme === 'sun') {
-      updateTheme({ theme: darkTheme })
-    }
+  const changeTheme = (theme) => {
+    updateTheme({ theme })
   }
 
   return (
     <section style={{ paddingTop: '1rem' }}>
-      <IconButton
-        icon={<Icon icon={theme === darkTheme ? 'moon-o' : 'sun-o'} />}
-        onClick={changeTheme}
-        circle
-        style={{
-          backgroundColor: theme === darkTheme ? darkBgColor : lightBgColor,
-          color: theme === darkTheme ? darkTxtColor : lightTxtColor,
-          boxShadow: '-1px 6px 10px black',
+      <Dropdown
+        renderTitle={() => {
+          return (
+            <IconButton
+              icon={
+                <Icon
+                  icon={
+                    theme === darkTheme
+                      ? 'moon-o'
+                      : theme === lightTheme
+                      ? 'sun-o'
+                      : 'first-order'
+                  }
+                />
+              }
+              circle
+              style={{
+                backgroundColor:
+                  theme === darkTheme
+                    ? darkBgColor
+                    : theme === lightTheme
+                    ? lightBgColor
+                    : contrastBgColor,
+                color: theme === darkTheme ? darkTxtColor : lightTxtColor,
+                boxShadow: '-1px 6px 10px black',
+              }}
+              // appearance="ghost"
+            />
+          )
         }}
-        // appearance="ghost"
-      />
+      >
+        <Item onClick={() => changeTheme(darkTheme)}>
+          <Icon icon="moon-o" /> Night
+        </Item>
+        <Item onClick={() => changeTheme(lightTheme)}>
+          <Icon icon="sun-o" /> Snow
+        </Item>
+        <Item onClick={() => changeTheme(contrastTheme)}>
+          <Icon icon="first-order" /> Red-White
+        </Item>
+      </Dropdown>
+
       {page}
       {dialog}
     </section>

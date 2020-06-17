@@ -8,6 +8,8 @@ import {
   darkTxtColor,
   mainColor2,
   mainColor,
+  mainColor3,
+  lightTheme,
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
@@ -39,9 +41,6 @@ export default function Area({ data, theme }) {
 const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 
-const getColorTxt = (theme) =>
-  theme === darkTheme ? darkTxtColor : lightTxtColor
-
 const optionsMerge = (data, theme) => {
   const { languages, values } = languageCounter(data)
   return {
@@ -57,9 +56,6 @@ const optionsMerge = (data, theme) => {
       type: 'scroll',
       orient: 'horizontal',
       bottom: 20,
-      textStyle: {
-        color: getColorTxt(theme),
-      },
     },
     // to fix the cut off labels on x/y xAxis/yAxis
     // grid: {
@@ -88,7 +84,9 @@ const optionsMerge = (data, theme) => {
             '#27528F',
             '#2A599C',
           ]
-        : mainColor2,
+        : theme === lightTheme
+        ? mainColor2
+        : mainColor3,
     tooltip: {
       axisPointer: {
         type: 'shadow',

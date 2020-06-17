@@ -7,6 +7,8 @@ import {
   lightTxtColor,
   mainColor2,
   mainColor,
+  mainColor3,
+  lightTheme,
 } from '../../../../../helpers/magicStrings'
 
 export default function Pie({ data, theme }) {
@@ -57,7 +59,13 @@ const optionsMerge = (data, theme) => {
       formatter: '{b} <br/>{c} MB',
     },
     backgroundColor: 'transparent',
-    colors: [theme === darkTheme ? mainColor : mainColor2],
+    colors: [
+      theme === darkTheme
+        ? mainColor
+        : theme === lightTheme
+        ? mainColor2
+        : mainColor3,
+    ],
     legend: {
       type: 'scroll',
       show: checkIfMobile(),
@@ -73,7 +81,12 @@ const optionsMerge = (data, theme) => {
     },
     series: [
       {
-        color: theme === darkTheme ? mainColor : mainColor2,
+        color:
+          theme === darkTheme
+            ? mainColor
+            : theme === lightTheme
+            ? mainColor2
+            : mainColor3,
         type: 'pie',
         radius: checkIfMobile() ? '100%' : '55%',
         center: ['50%', '50%'],
@@ -92,7 +105,12 @@ const optionsMerge = (data, theme) => {
           length2: 20,
         },
         itemStyle: {
-          color: theme === darkTheme ? mainColor : mainColor2,
+          color:
+            theme === darkTheme
+              ? mainColor
+              : theme === lightTheme
+              ? mainColor2
+              : mainColor3,
           // shadowBlur: 200,
           // shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
