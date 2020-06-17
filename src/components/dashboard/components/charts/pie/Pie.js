@@ -1,6 +1,7 @@
 import React from 'react'
 import { mapPieData } from '../../../functions/chartBuilders.functions'
 import ReactEcharts from 'echarts-for-react'
+import { InView } from 'react-intersection-observer'
 import {
   darkTheme,
   lightTxtColor,
@@ -9,13 +10,29 @@ import {
 } from '../../../../../helpers/magicStrings'
 
 export default function Pie({ data, theme }) {
-  return (
-    <ReactEcharts
-      style={{ height: '700px', width: '100%' }}
-      theme={theme === darkTheme ? 'dark' : 'light'}
-      option={optionsMerge(data, theme)}
-    />
-  )
+  return (() => {
+    let oneTime = false
+    const getChart = () => (
+      <ReactEcharts
+        style={{ height: '700px', width: '100%' }}
+        theme={theme === darkTheme ? 'dark' : 'light'}
+        option={optionsMerge(data, theme)}
+      />
+    )
+    const updateOneTime = () => {
+      oneTime = true
+      return getChart()
+    }
+    return (
+      <InView>
+        {({ inView, ref, entry }) => (
+          <div ref={ref} style={{ height: '700px', width: '100%' }}>
+            {inView && !oneTime ? getChart() : updateOneTime()}
+          </div>
+        )}
+      </InView>
+    )
+  })()
 }
 const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
@@ -79,12 +96,12 @@ const optionsMerge = (data, theme) => {
           // shadowBlur: 200,
           // shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
-
-        animationType: 'scale',
-        animationEasing: 'elasticOut',
-        animationDelay: function (idx) {
-          return Math.random() * 200
-        },
+        animation: false,
+        // animationType: 'scale',
+        // animationEasing: 'elasticOut',
+        // animationDelay: function (idx) {
+        //   return Math.random() * 200
+        // },
       },
     ],
   }
