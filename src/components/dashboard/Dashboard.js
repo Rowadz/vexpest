@@ -136,10 +136,6 @@ const getData = async (setSate, name) => {
   // )
 
   try {
-    if (localStorage.getItem('data')) {
-      setSate({ data: JSON.parse(localStorage.getItem('data')), err: false })
-      return
-    }
     let res = []
     for (const i of [...Array(10).keys()]) {
       const data = await (
@@ -153,7 +149,6 @@ const getData = async (setSate, name) => {
       if (data.length === 0) break
       res.push(...data)
     }
-    localStorage.setItem('data', JSON.stringify(res))
     setSate({ data: res, err: false })
   } catch (error) {
     console.error(error)

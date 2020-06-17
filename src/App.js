@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) =>
       theme.mode === darkTheme || !theme.mode ? '#0f131a' : '#fff'};
     color: ${({ theme }) => (theme.mode === darkTheme ? '#e9ebf0' : '#575757')};
-    transition: background-color 0.3s ease-in-out;
+    /*transition: background-color 0.3s ease-in-out;*/
   }
 `
 
