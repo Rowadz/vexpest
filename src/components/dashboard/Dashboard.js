@@ -27,9 +27,13 @@ import {
 const { Header, Title, Body, Footer } = Modal
 const { Item } = Dropdown
 
-const Dashboard = ({ theme, updateTheme }) => {
-  const query = new URLSearchParams(window.location.search)
-  const name = query.get('name')
+const Dashboard = ({
+  theme,
+  updateTheme,
+  match: {
+    params: { name },
+  },
+}) => {
   const [state, setSate] = useState({
     data: null,
     err: false,
@@ -38,7 +42,7 @@ const Dashboard = ({ theme, updateTheme }) => {
   })
   useEffect(() => {
     getData(setSate.bind(Dashboard), name)
-  }, [])
+  }, [name])
   let page = null
   let dialog = null
   if (!state.data) {
@@ -75,6 +79,7 @@ const Dashboard = ({ theme, updateTheme }) => {
   }
 
   const changeTheme = (theme) => {
+    localStorage.setItem('theme', theme)
     updateTheme({ theme })
   }
 

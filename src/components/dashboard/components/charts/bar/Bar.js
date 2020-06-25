@@ -4,8 +4,6 @@ import ReactEcharts from 'echarts-for-react'
 import { InView } from 'react-intersection-observer'
 import {
   darkTheme,
-  lightTxtColor,
-  darkTxtColor,
   mainColor2,
   mainColor,
   mainColor3,

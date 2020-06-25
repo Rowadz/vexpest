@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Input, Button, Icon } from 'rsuite'
-import { useHistory } from 'react-router-dom'
 import { mainColor, darkTheme } from '../../helpers/magicStrings'
 import spaceman from './spaceman.svg'
+import { NavLink } from 'react-router-dom'
 import chart2 from './chart2.svg'
 import creator from './creator.svg'
 import sourceCode from './sourceCode.svg'
@@ -12,22 +12,14 @@ const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 export default function Home({ theme }) {
   console.log(theme)
-  const [name] = useState(null)
-  const history = useHistory()
-  const taksim = (e) => {
-    history.push({
-      pathname: '/dashboard',
-      search: `?name=${document.getElementById('textarea-name').value}`,
-    })
-  }
-
-  if (name) return name
+  const [name, setName] = useState(null)
+  const changeName = (n) => setName(n)
 
   return (
     <Container>
       <Row className="pt-1">
         <Col xs={12} sm={12} md={6} lg={6}>
-          <img src={spaceman} width={'100%'} height={'200px'} />
+          <img src={spaceman} width={'100%'} height={'200px'} alt="spaceman" />
         </Col>
         <Col xs={12} sm={12} md={6} lg={6}>
           <div
@@ -73,10 +65,10 @@ export default function Home({ theme }) {
           lg={6}
           className={checkIfMobile() ? 'pt-3' : ''}
         >
-          <img src={chart2} width={'100%'} height={'200px'} />
+          <img src={chart2} width={'100%'} height={'200px'} alt="chart2" />
         </Col>
         <Col xs={12} sm={12} md={6} lg={6}>
-          <img src={creator} width={'100%'} height={'200px'} />
+          <img src={creator} width={'100%'} height={'200px'} alt="creator" />
         </Col>
         <Col xs={12} sm={12} md={6} lg={6}>
           <div
@@ -94,6 +86,7 @@ export default function Home({ theme }) {
               <a
                 href="https://www.linkedin.com/in/mohammed-al-rowad/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon
                   icon="linkedin"
@@ -101,7 +94,11 @@ export default function Home({ theme }) {
                   style={{ color: mainColor, padding: '5px' }}
                 />
               </a>
-              <a href="https://github.com/MohammedAl-Rowad" target="_blank">
+              <a
+                href="https://github.com/MohammedAl-Rowad"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon
                   icon="github-alt"
                   size="2x"
@@ -111,6 +108,7 @@ export default function Home({ theme }) {
               <a
                 href="https://www.youtube.com/channel/UC1Uw_GN4sodGisimwZNzMoA?view_as=subscriber"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon
                   icon="youtube-play"
@@ -135,6 +133,7 @@ export default function Home({ theme }) {
               <a
                 href="https://github.com/MohammedAl-Rowad/vexpest/tree/version_2"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {' '}
                 here{' '}
@@ -143,6 +142,7 @@ export default function Home({ theme }) {
               <a
                 href="https://github.com/MohammedAl-Rowad/vexpest"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {' '}
                 here{' '}
@@ -151,6 +151,7 @@ export default function Home({ theme }) {
               <a
                 href="https://github.com/MohammedAl-Rowad/vexpest_V2"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {' '}
                 here{' '}
@@ -166,7 +167,12 @@ export default function Home({ theme }) {
           lg={6}
           className={checkIfMobile() ? 'pt-3' : ''}
         >
-          <img src={sourceCode} width={'100%'} height={'200px'} />
+          <img
+            src={sourceCode}
+            width={'100%'}
+            height={'200px'}
+            alt="sourceCode"
+          />
         </Col>
       </Row>
       <div style={{ marginTop: '10px' }} className="pt-4">
@@ -180,12 +186,15 @@ export default function Home({ theme }) {
           }}
           id="textarea-name"
           placeholder="Github username"
+          onChange={changeName}
         />
       </div>
       <div style={{ marginTop: '10px' }}>
-        <Button appearance="ghost" onClick={taksim}>
-          Generate
-        </Button>
+        <NavLink to={`/dashboard/${name}`}>
+          <Button appearance="ghost" disabled={!name}>
+            Generate
+          </Button>
+        </NavLink>
       </div>
     </Container>
   )

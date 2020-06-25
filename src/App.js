@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
 import './App.scss'
 import Home from './components/home/Home'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Container, Row, Col } from 'react-grid-system'
 import 'rsuite/dist/styles/rsuite-dark.css'
-import { Navbar, Nav, Icon } from 'rsuite'
+import { Navbar, Icon } from 'rsuite'
 import {
   darkTheme,
   lightBgColor,
@@ -21,8 +16,7 @@ import {
   mainColor3,
   contrastTheme,
 } from './helpers/magicStrings'
-const { Body, Header } = Navbar
-const { Item } = Nav
+const { Header } = Navbar
 
 const GlobalStyle = createGlobalStyle`
   body, .rs-panel-heading, .rs-panel, .rs-navbar.rs-navbar-default, .rs-navbar.rs-navbar-default .rs-navbar-header a {
@@ -43,7 +37,13 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = () => {
-  const [state, setState] = useState({ theme: darkTheme })
+  let savedTheme = localStorage.getItem('theme')
+  if (![lightTheme, darkTheme, contrastTheme].includes(savedTheme)) {
+    savedTheme = null
+  }
+  const [state, setSate] = useState({
+    theme: savedTheme || lightTheme,
+  })
   return (
     <ThemeProvider theme={{ mode: state.theme }}>
       <GlobalStyle />
@@ -82,13 +82,22 @@ const App = () => {
           </Navbar>
           <Container>
             <Switch>
-              <Route path="/dashboard">
-                <Row>
-                  <Col sm={12}>
-                    <Dashboard theme={state.theme} updateTheme={setState} />
-                  </Col>
-                </Row>
-              </Route>
+              <Route
+                path="/dashboard/:name"
+                render={(props) => {
+                  return (
+                    <Row>
+                      <Col sm={12}>
+                        <Dashboard
+                          {...props}
+                          theme={state.theme}
+                          updateTheme={setSate}
+                        />
+                      </Col>
+                    </Row>
+                  )
+                }}
+              ></Route>
               <Route path="/">
                 <Row>
                   <Col sm={12}>

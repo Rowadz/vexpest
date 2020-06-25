@@ -2,8 +2,6 @@ import React from 'react'
 import { mapToLine } from '../../../functions/chartBuilders.functions'
 import {
   darkTheme,
-  lightTxtColor,
-  darkTxtColor,
   mainColor2,
   mainColor,
   mainColor3,
