@@ -13,7 +13,6 @@ import {
 } from '../../../../../helpers/magicStrings'
 
 export default function Area({ data, theme }) {
-  console.log(theme)
   return (() => {
     let oneTime = false
     const getChart = () => (

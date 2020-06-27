@@ -42,7 +42,7 @@ const App = () => {
     savedTheme = null
   }
   const [state, setSate] = useState({
-    theme: savedTheme || lightTheme,
+    theme: savedTheme || darkTheme,
   })
   return (
     <ThemeProvider theme={{ mode: state.theme }}>

@@ -11,7 +11,6 @@ import { Container, Row, Col } from 'react-grid-system'
 const checkIfMobile = () =>
   /Mobi/.test(navigator.userAgent) || /Mobi|Android/i.test(navigator.userAgent)
 export default function Home({ theme }) {
-  console.log(theme)
   const [name, setName] = useState(null)
   const changeName = (n) => setName(n)
 
