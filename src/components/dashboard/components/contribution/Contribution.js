@@ -5,16 +5,8 @@ export default function Contribution({ contribution }) {
   const cont = contribution.length
     ? contribution.map(({ login, html_url, avatar_url }) => {
         return (
-          <Col md={6} sm={12}>
-            <Panel
-              shaded
-              bordered
-              header={
-                <a href={html_url} target="_blank" rel="noopener noreferrer">
-                  {login}
-                </a>
-              }
-            >
+          <Col md={6} sm={12} className="shrink">
+            <Panel shaded bordered header={login}>
               <TagGroup>
                 <Tag>
                   <a
@@ -35,10 +27,12 @@ export default function Contribution({ contribution }) {
                   </a>
                 </Tag>
               </TagGroup>
-              <img
-                src={`https://avatars.dicebear.com/api/bottts/${login}.svg`}
-                alt={`${login} generated avatar`}
-              />
+              <a href={html_url} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={`https://avatars.dicebear.com/api/bottts/${login}.svg`}
+                  alt={`${login} generated avatar`}
+                />
+              </a>
             </Panel>
           </Col>
         )
