@@ -8,6 +8,7 @@ import KpiNotArchived from './components/charts/KPI/KpiNotArchived'
 import Area from './components/charts/area/Area'
 import { Row, Col } from 'react-grid-system'
 import Spinner from './components/Spinner'
+import Contribution from './components/contribution/Contribution'
 // import { Base64 } from 'js-base64'
 import StarsGraph from './components/charts/starsGraph/starsGraph'
 import Line from './components/charts/line/line'
@@ -48,7 +49,7 @@ const Dashboard = ({
   if (!state.data) {
     page = <Spinner />
   } else {
-    page = dashboardPage(state.data, theme)
+    page = dashboardPage(state.data, theme, state.contribution)
   }
   if (state.err) {
     dialog = (
@@ -133,7 +134,7 @@ const Dashboard = ({
   )
 }
 
-const dashboardPage = (data, theme) => {
+const dashboardPage = (data, theme, contribution) => {
   const kpis = [
     KpiRepos,
     KpiForks,
@@ -147,13 +148,15 @@ const dashboardPage = (data, theme) => {
     </Col>
   ))
 
-  const charts = [Line, Pie, Area, Bar, StarsGraph].map((el, i) => (
-    <Row className="pt-4" key={i}>
-      <Col xs={12} sm={12} md={12} lg={12}>
-        {React.createElement(el, { data, theme })}
-      </Col>
-    </Row>
-  ))
+  const charts = [Line, Pie, Area, Contribution, Bar, StarsGraph].map(
+    (el, i) => (
+      <Row className="pt-4" key={i}>
+        <Col xs={12} sm={12} md={12} lg={12}>
+          {React.createElement(el, { data, theme, contribution })}
+        </Col>
+      </Row>
+    )
+  )
 
   return (
     <section>
@@ -184,7 +187,10 @@ const getData = async (setSate, name) => {
       if (data.length === 0) break
       res.push(...data)
     }
-    setSate({ data: res, err: false })
+    const contribution = await (
+      await fetch(`https://api.github.com/orgs/${name}/members`)
+    ).json()
+    setSate({ data: res, err: false, contribution })
   } catch (error) {
     console.error(error)
     setSate({ err: true })

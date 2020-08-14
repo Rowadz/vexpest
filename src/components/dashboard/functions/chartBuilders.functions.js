@@ -111,8 +111,20 @@ const graphNodesLinks = (data) => {
         normal: { color: globalTheme === darkTheme ? mainColor : mainColor2 },
       },
       symbolSize: 20,
-      x: -266.82776,
-      y: 299.6904,
+      x:
+        -Math.floor(Math.random() * 150) +
+          1 +
+          Math.ceil(Math.random() * 100) * Math.random() >
+        0.5
+          ? -1
+          : 1,
+      y:
+        Math.floor(Math.random() * 300) +
+          1 +
+          Math.ceil(Math.random() * 100) * Math.random() >
+        0.5
+          ? -1
+          : 1,
       attributes: { modularity_class: 0 },
     },
     ...graphPlaceHolder.nodes.slice(1, data.length + 1),
