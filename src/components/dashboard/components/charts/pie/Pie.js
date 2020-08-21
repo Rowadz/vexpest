@@ -68,11 +68,11 @@ const optionsMerge = (data, theme) => {
     ],
     legend: {
       type: 'scroll',
-      show: checkIfMobile(),
-      orient: 'horizontal',
-      right: checkIfMobile() ? null : 10,
-      top: checkIfMobile() ? null : 20,
-      bottom: 20,
+      show: true,
+      orient: checkIfMobile() ? 'horizontal' : 'vertical',
+      right: 10,
+      // top: 20,
+      bottom: checkIfMobile() ? 20 : null,
       textStyle: {
         color: getColorTxt(theme, 1),
       },
@@ -114,7 +114,7 @@ const optionsMerge = (data, theme) => {
           // shadowBlur: 200,
           // shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
-        animation: false,
+        animation: true,
         // animationType: 'scale',
         // animationEasing: 'elasticOut',
         // animationDelay: function (idx) {
